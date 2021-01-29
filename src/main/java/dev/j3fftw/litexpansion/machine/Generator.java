@@ -22,7 +22,7 @@ public class Generator extends CoalGenerator {
     @Nonnull
     @Override
     public String getInventoryTitle() {
-        return "&7Generator";
+        return "&7发电机";
     }
 
     @Nonnull

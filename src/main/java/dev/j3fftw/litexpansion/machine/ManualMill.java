@@ -17,7 +17,7 @@ public class ManualMill extends CraftingMultiBlock {
         new NamespacedKey(LiteXpansion.getInstance(), "manual_mill"),
         Items.MANUAL_MILL,
         "",
-        "&7Used to Forge Metals"
+        "&7用于铸造金属"
     );
 
     private static final ItemStack anvil = new ItemStack(Material.ANVIL);

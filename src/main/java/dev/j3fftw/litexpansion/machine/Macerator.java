@@ -89,7 +89,7 @@ public class Macerator extends AContainer {
     @Nonnull
     @Override
     public String getInventoryTitle() {
-        return "&6Macerator";
+        return "&6粉碎机";
     }
 
     @Nonnull

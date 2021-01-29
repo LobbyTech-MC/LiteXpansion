@@ -214,7 +214,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
                     }
                 }
             } catch (ReflectiveOperationException e) {
-                getLogger().log(Level.WARNING, "Failed to load placed blocks", e);
+                getLogger().log(Level.WARNING, "加载放置方块失败, Failed to load placed blocks", e);
             }
             return data;
         }));
