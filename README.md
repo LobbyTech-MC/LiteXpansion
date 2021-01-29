@@ -3,8 +3,8 @@ LiteXpansion 是继承了 SlimeXpansion 所有物品和部分功能的扩展, �
 
 ## :world_map: 索引
 * [下载](#floppy_disk-下载)
-* [Contents](#contents)
-  * [Items](#card_index_dividers-items)
+* [插件内容](#%E6%8F%92%E4%BB%B6%E5%86%85%E5%AE%B9)
+  * [物品](#card_index_dividers-%E7%89%A9%E5%93%81)
   * [Machines](#electric_plug-machines)
   * [Tools](#hammer_and_wrench-tools)
   * [Weapons](#crossed_swords-weapons)
