@@ -243,7 +243,7 @@ public final class Items {
     public static final SlimefunItemStack COAL_DUST = new SlimefunItemStack(
         "COAL_DUST",
         Material.BLACK_DYE,
-        "&碳粉"
+        "&7碳粉"
     );
     public static final SlimefunItemStack RAW_CARBON_FIBRE = new SlimefunItemStack(
         "RAW_CARBON_FIBRE",
