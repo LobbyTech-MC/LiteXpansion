@@ -1,17 +1,6 @@
 # LiteXpansion
 LiteXpansion 是继承了 SlimeXpansion 所有物品和部分功能的扩展, 开发者正在努力开发使其能提供类似 IC2 模组的体验.
 
-## :world_map: 索引
-* [下载](#floppy_disk-下载)
-* [插件内容](#%E6%8F%92%E4%BB%B6%E5%86%85%E5%AE%B9)
-  * [物品](#card_index_dividers-%E7%89%A9%E5%93%81)
-  * [Machines](#electric_plug-machines)
-  * [Tools](#hammer_and_wrench-tools)
-  * [Weapons](#crossed_swords-weapons)
-  * [Armour](#shield-armour)
-  * [UU Matter](#brain-uu-matter)
-* [Discord](#computer-discord)
-
 ## :floppy_disk: 下载
 单击此处下载 LiteXpansion: [下载 LiteXpansion](https://github.com/StarWishsama/LiteXpansion-CN/releases)
 
@@ -31,7 +20,7 @@ LiteXpansion 是继承了 SlimeXpansion 所有物品和部分功能的扩展, �
 - 镁钍合金粉 - ; (制作中, 还没有实装)
 - 钍粉 - ; (制作中, 还没有实装)
 - 废料 - 用于合成 UU 物质;
-- UU 物质 - Used to create various other items;
+- UU 物质 - 可以创造出多种物品;
 - 铱 - ; (制作中, 还没有实装)
 - 铱板 - ; (制作中, 还没有实装)
 - 精炼铁锭 - 可以用于合成其他物品的金属; (制作中, 还没有实装)
