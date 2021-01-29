@@ -39,7 +39,7 @@ public class MassFabricator extends SlimefunItem implements InventoryBlock, Ener
 
     private static final Map<BlockPosition, Integer> progress = new HashMap<>();
 
-    private static final CustomItem progressItem = new CustomItem(Items.UU_MATTER.getType(), "&7Progress");
+    private static final CustomItem progressItem = new CustomItem(Items.UU_MATTER.getType(), "&7进度");
 
     private static final ItemStack plate = SlimefunItems.REINFORCED_PLATE;
     private static final ItemStack circuitBoard = SlimefunItems.ADVANCED_CIRCUIT_BOARD;

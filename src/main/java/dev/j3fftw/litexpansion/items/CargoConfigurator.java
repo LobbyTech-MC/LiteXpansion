@@ -150,7 +150,7 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
 
             BlockStorage.setBlockInfo(e.getClickedBlock(), config, true);
             BlockStorage.getStorage(e.getClickedBlock().getWorld()).reloadInventory(e.getClickedBlock().getLocation());
-            e.getPlayer().sendMessage(ChatColor.GREEN + "Applied configuration!");
+            e.getPlayer().sendMessage(ChatColor.GREEN + "已黏贴配置!");
         } else if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             PersistentDataAPI.setString(meta, CARGO_BLOCK, blockId);
             PersistentDataAPI.setString(meta, CARGO_CONFIG, BlockStorage.getBlockInfoAsJson(e.getClickedBlock()));
