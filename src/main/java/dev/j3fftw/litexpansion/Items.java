@@ -85,7 +85,7 @@ public final class Items {
     public static final SlimefunItemStack DIAMOND_DRILL = new SlimefunItemStack(
         "DIAMOND_DRILL",
         Material.DIAMOND_SHOVEL,
-        "&b钻石",
+        "&b钻石钻头",
         "",
         "&7快速破坏任何岩石和黑曜石",
         "&7右键缓慢破坏",
