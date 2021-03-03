@@ -1,6 +1,5 @@
 package dev.j3fftw.litexpansion;
 
-import dev.j3fftw.extrautils.utils.LoreBuilderDynamic;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.Recycler;
@@ -29,9 +28,9 @@ public final class Items {
     public static final SlimefunItemStack ELECTRIC_CHESTPLATE = new SlimefunItemStack(
         "ELECTRIC_CHESTPLATE",
         Material.LEATHER_CHESTPLATE, Color.TEAL,
-        "&9Electric Chestplate",
+        "&9电动护甲",
         "",
-        "&8\u21E8 &7Negates all the damage dealt to player.",
+        "&8\u21E8 &7抵消所有对自身的伤害.",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 8192 J"
     );
@@ -41,12 +40,12 @@ public final class Items {
     public static final SlimefunItemStack NANO_BLADE = new SlimefunItemStack(
         "NANO_BLADE",
         Material.DIAMOND_SWORD,
-        "&2Nano Blade &c(Off)",
+        "&2纳米剑 &c(关)",
         "",
-        "&fAn advanced piece of technology which can",
-        "&fcut through organic tissue with ease.",
+        "&f一把高科技的光剑,",
+        "&f可以轻松斩断对手.",
         "",
-        "&fToggle: &aRight Click",
+        "&f开关: &a右键",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / " + NanoBlade.CAPACITY + " J"
     );
@@ -57,55 +56,55 @@ public final class Items {
     public static final SlimefunItemStack WRENCH = new SlimefunItemStack(
         "WRENCH",
         Material.GOLDEN_HOE,
-        "&6Wrench",
+        "&6扳手",
         "",
-        "&7Click any machine, generator, capacitor,",
-        "&7or cargo node to instantly break it!",
+        "&7右键任何机器, 发电机, 电容器,",
+        "&7或者货运节点都会瞬间拆下!",
         ""
     );
     public static final SlimefunItemStack GLASS_CUTTER = new SlimefunItemStack(
         "GLASS_CUTTER",
         Material.GHAST_TEAR,
-        "&bGlass Cutter",
+        "&b玻璃刀",
         "",
-        "&7> &eLeft Click &7- Cut glass quickly",
-        "&7> &eRight Click &7- Cut glass slowly",
+        "&7> &e左键 &7- 快速割下玻璃",
+        "&7> &e右键 &7- 慢速割下玻璃",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 300 J"
     );
     public static final SlimefunItemStack MINING_DRILL = new SlimefunItemStack(
         "MINING_DRILL",
         Material.IRON_SHOVEL,
-        "&7Mining Drill",
+        "&7采矿钻头",
         "",
-        "&7Instantly breaks stone and stone variants",
-        "&7Right click to break block slower",
+        "&7快速破坏任何岩石",
+        "&7右键缓慢破坏",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 1000 J"
     );
     public static final SlimefunItemStack DIAMOND_DRILL = new SlimefunItemStack(
         "DIAMOND_DRILL",
         Material.DIAMOND_SHOVEL,
-        "&bDiamond Drill",
+        "&b钻石钻头",
         "",
-        "&7Instantly breaks obsidian, stone, and stone variants",
-        "&7Right click to break block slower",
+        "&7快速破坏任何岩石和黑曜石",
+        "&7右键缓慢破坏",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 1000 J"
     );
     public static final SlimefunItemStack TREETAP = new SlimefunItemStack(
         "TREETAP",
         Material.WOODEN_HOE,
-        "&7Treetap"
+        "&7木龙头"
     );
     public static final SlimefunItemStack CARGO_CONFIGURATOR = new SlimefunItemStack(
         "CARGO_CONFIGURATOR",
         Material.COMPASS,
-        "&7Cargo Configurator",
+        "&7节点配置复制器",
         "",
-        "&7> &eRight Click &7- Copy node configuration",
-        "&7> &eLeft Click  &7- Apply node configuration",
-        "&7> &eShift+Right Click &7- Clear node configuration"
+        "&7> &e右键 &7- 复制节点配置",
+        "&7> &e左键  &7- 黏贴节点配置",
+        "&7> &eShift+右键 &7- 清除节点配置"
     );
     //endregion
 
@@ -113,53 +112,53 @@ public final class Items {
     public static final SlimefunItemStack TIN_PLATE = new SlimefunItemStack(
         "TIN_PLATE",
         Material.WHITE_CARPET,
-        "&7Tin Plate"
+        "&7锡板"
     );
 
     public static final SlimefunItemStack TIN_ITEM_CASING = new SlimefunItemStack(
         "TIN_ITEM_CASING",
         Material.WHITE_CARPET,
-        "&7Tin Item Casing"
+        "&7锡质外壳"
     );
 
     public static final SlimefunItemStack UNINSULATED_TIN_CABLE = new SlimefunItemStack(
         "UNINSULATED_TIN_CABLE",
         Material.STRING,
-        "&7Uninsulated Tin Cable"
+        "&7锡质导线"
     );
 
     public static final SlimefunItemStack TIN_CABLE = new SlimefunItemStack(
         "TIN_CABLE",
         Material.STRING,
-        "&7Tin Cable"
+        "&7绝缘锡质导线"
     );
 
     public static final SlimefunItemStack COPPER_PLATE = new SlimefunItemStack(
         "COPPER_PLATE",
         Material.ORANGE_CARPET,
-        "&7Copper Plate"
+        "&7铜板"
     );
 
     public static final SlimefunItemStack COPPER_ITEM_CASING = new SlimefunItemStack(
         "COPPER_ITEM_CASING",
         Material.ORANGE_CARPET,
-        "&7Copper Item Casing"
+        "&7铜质外壳"
     );
 
     public static final SlimefunItemStack MAG_THOR = new SlimefunItemStack(
         "MAG_THOR",
         Material.IRON_INGOT,
-        "&b&lMag-Thor",
+        "&b&l镁钍合金",
         "",
-        "&7&oAn extremely durable alloy used",
-        "&7&oonly in the most advanced machines"
+        "&7&o坚如磐石的合金",
+        "&7&o用于大多数高级机器中"
     );
 
     public static final SlimefunItemStack THORIUM = new SlimefunItemStack(
         "THORIUM",
         new CustomItem(SkullItem.fromHash("b87403257c0eaa518cf186deccde137d476556ccff146d503fb2e73956582f37"),
             "Thorium"),
-        "&8Thorium",
+        "&8钍",
         "",
         LoreBuilder.radioactive(Radioactivity.HIGH),
         LoreBuilder.HAZMAT_SUIT_REQUIRED
@@ -168,68 +167,68 @@ public final class Items {
     public static final SlimefunItemStack SCRAP = new SlimefunItemStack(
         "SCRAP",
         Material.DEAD_BUSH,
-        "&8Scrap",
+        "&8废料",
         "",
-        "&7Can be used to create &5UU-Matter"
+        "&7用于合成 &5UU 物质"
     );
     public static final SlimefunItemStack UU_MATTER = new SlimefunItemStack(
         "UU_MATTER",
         Material.PURPLE_DYE,
-        "&5UU-Matter",
+        "&5UU 物质",
         "",
-        "&7Can be used to create items or resources"
+        "&7用于合成各种物品"
     );
     public static final SlimefunItemStack IRIDIUM = new SlimefunItemStack(
         "IRIDIUM",
         Material.WHITE_DYE,
-        "&fIridium"
+        "&f铱"
     );
     public static final SlimefunItemStack IRIDIUM_PLATE = new SlimefunItemStack(
         "IRIDIUM_PLATE",
         Material.PAPER,
-        "&fIridium Plate",
+        "&f铱板",
         "",
-        "&7Used to create Iridium Armor"
+        "&7用于合成量子套"
     );
     public static final SlimefunItemStack THORIUM_DUST = new SlimefunItemStack(
         "THORIUM_DUST",
         Material.BLACK_DYE,
-        "&8Thorium Dust"
+        "&8钍粉"
     );
     public static final SlimefunItemStack REFINED_IRON = new SlimefunItemStack(
         "REFINED_IRON",
         Material.IRON_INGOT,
-        "&7Refined Iron"
+        "&7精炼铁"
     );
     public static final SlimefunItemStack MACHINE_BLOCK = new SlimefunItemStack(
         "MACHINE_BLOCK",
         Material.IRON_BLOCK,
-        "&7Machine Block"
+        "&7机器方块"
     );
     public static final SlimefunItemStack UNINSULATED_COPPER_CABLE = new SlimefunItemStack(
         "UNINSULATED_COPPER_CABLE",
         Material.STRING,
-        "&7Uninsulated Copper Cable"
+        "&7铜质导线"
     );
     public static final SlimefunItemStack COPPER_CABLE = new SlimefunItemStack(
         "COPPER_CABLE",
         Material.STRING,
-        "&7Copper Cable"
+        "&7绝缘铜质导线"
     );
     public static final SlimefunItemStack RUBBER = new SlimefunItemStack(
         "RUBBER",
         Material.INK_SAC,
-        "&7Rubber"
+        "&7橡胶"
     );
     public static final SlimefunItemStack ELECTRONIC_CIRCUIT = new SlimefunItemStack(
         "ELECTRONIC_CIRCUIT",
         Material.COBWEB,
-        "&7Electronic Circuit"
+        "&7电路板"
     );
     public static final SlimefunItemStack ADVANCED_CIRCUIT = new SlimefunItemStack(
         "ADVANCED_CIRCUIT",
         Material.COBWEB,
-        "&7Advanced Circuit"
+        "&7高级电路板"
     );
     //endregion
 
@@ -240,68 +239,68 @@ public final class Items {
     public static final SlimefunItemStack COAL_DUST = new SlimefunItemStack(
         "COAL_DUST",
         Material.BLACK_DYE,
-        "&7Coal Dust"
+        "&7碳粉"
     );
     public static final SlimefunItemStack RAW_CARBON_FIBRE = new SlimefunItemStack(
         "RAW_CARBON_FIBRE",
         Material.BLACK_DYE,
-        "&7Raw Carbon Fibre"
+        "&7粗制碳网"
     );
     public static final SlimefunItemStack RAW_CARBON_MESH = new SlimefunItemStack(
         "RAW_CARBON_MESH",
         Material.BLACK_DYE,
-        "&7Raw Carbon Mesh"
+        "&7粗制碳板"
     );
     public static final SlimefunItemStack CARBON_PLATE = new SlimefunItemStack(
         "CARBON_PLATE",
         Material.BLACK_CARPET,
-        "&7Carbon Plate"
+        "&7碳板"
     );
     public static final SlimefunItemStack ADVANCED_ALLOY = new SlimefunItemStack(
         "ADVANCED_ALLOY",
         Material.PAPER,
-        "&7Advanced Alloy"
+        "&7高级合金"
     );
     //endregion
 
     public static final SlimefunItemStack ADVANCED_MACHINE_BLOCK = new SlimefunItemStack(
         "ADVANCED_MACHINE_BLOCK",
         Material.DIAMOND_BLOCK,
-        "&7Advanced Machine Block"
+        "&7高级机器方块"
     );
 
     public static final SlimefunItemStack LAPOTRON_CRYSTAL = new SlimefunItemStack(
         "LAPOTRON_CRYSTAL",
         Material.DIAMOND,
-        "&7Lapotron Crystal"
+        "&7兰波顿水晶"
     );
     public static final SlimefunItemStack REINFORCED_STONE = new SlimefunItemStack(
         "REINFORCED_STONE",
         Material.STONE,
-        "&7Reinforced Stone"
+        "&7强化原石"
     );
     public static final SlimefunItemStack REINFORCED_DOOR = new SlimefunItemStack(
         "REINFORCED_DOOR",
         Material.IRON_DOOR,
-        "&7Reinforced Door"
+        "&7强化铁门"
     );
     public static final SlimefunItemStack REINFORCED_GLASS = new SlimefunItemStack(
         "REINFORCED_GLASS",
         Material.GRAY_STAINED_GLASS,
-        "&7Reinforced Glass"
+        "&7强化玻璃"
     );
     public static final SlimefunItemStack MIXED_METAL_INGOT = new SlimefunItemStack(
         "MIXED_METAL_INGOT",
         Material.IRON_INGOT,
-        "&7Mixed Metal Ingot"
+        "&7合金锭"
     );
     // Machines
     public static final SlimefunItemStack RECYCLER = new SlimefunItemStack(
         "SCRAP_MACHINE",
         Material.BLACK_CONCRETE,
-        "&8Recycler",
+        "&8回收机",
         "",
-        "&fProduces &8Scrap &ffrom anything",
+        "&f从任何物品中回收出 &8废料",
         "",
         LoreBuilderDynamic.powerBuffer(Recycler.CAPACITY),
         LoreBuilderDynamic.powerPerTick(Recycler.ENERGY_CONSUMPTION)
@@ -309,9 +308,10 @@ public final class Items {
     public static final SlimefunItemStack MASS_FABRICATOR_MACHINE = new SlimefunItemStack(
         "MASS_FABRICATOR_MACHINE",
         Material.PURPLE_CONCRETE,
-        "&5Mass Fabricator",
+        "&5物质生成机",
         "",
-        "&fConverts &8Scrap &fto &5UU-Matter",
+        "&f将 &8废料 &f转换成 &5UU 物质",
+        "&7&o&m\"只需要亿点点电\"",
         "",
         LoreBuilderDynamic.powerBuffer(MassFabricator.CAPACITY),
         LoreBuilderDynamic.powerPerTick(MassFabricator.ENERGY_CONSUMPTION)
@@ -319,9 +319,9 @@ public final class Items {
     public static final SlimefunItemStack RUBBER_SYNTHESIZER_MACHINE = new SlimefunItemStack(
         "RUBBER_SYNTHESIZER",
         Material.ORANGE_CONCRETE,
-        "&6Rubber Synthesizer",
+        "&6橡胶合成机",
         "",
-        "&fConverts Bucket of Oil to &7Rubber",
+        "&f将原油转化为 &7橡胶",
         "",
         LoreBuilderDynamic.powerBuffer(RubberSynthesizer.CAPACITY),
         LoreBuilderDynamic.powerPerTick(RubberSynthesizer.ENERGY_CONSUMPTION)
@@ -329,38 +329,38 @@ public final class Items {
     public static final SlimefunItemStack MACERATOR = new SlimefunItemStack(
         "MACERATOR",
         Material.IRON_BLOCK,
-        "&7Macerator"
+        "&7粉碎机"
     );
     //// Solar panels
     public static final SlimefunItemStack ADVANCED_SOLAR_PANEL = new SlimefunItemStack(
         "ADVANCED_SOLAR_PANEL",
         Material.BLACK_GLAZED_TERRACOTTA,
-        "&7&lAdvanced Solar Panel",
-        "&9Works at Night",
+        "&7&l高级太阳能板",
+        "&9可以在夜间工作",
         "",
         LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.ADVANCED_STORAGE),
-        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ADVANCED_DAY_RATE) + " (Day)",
-        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ADVANCED_NIGHT_RATE) + " (Night)"
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ADVANCED_DAY_RATE) + " (日间)",
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ADVANCED_NIGHT_RATE) + " (夜间)"
     );
     public static final SlimefunItemStack HYBRID_SOLAR_PANEL = new SlimefunItemStack(
         "HYBRID_SOLAR_PANEL",
         Material.GRAY_GLAZED_TERRACOTTA,
-        "&b&lHybrid Solar Panel",
-        "&9Works at Night",
+        "&b&l混合太阳能板",
+        "&9可以在夜间及其他世界工作",
         "",
         LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.HYBRID_STORAGE),
-        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.HYBRID_DAY_RATE) + " (Day + Nether)",
-        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.HYBRID_NIGHT_RATE) + " (Night + End)"
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.HYBRID_DAY_RATE) + " (日间 + 下界)",
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.HYBRID_NIGHT_RATE) + " (夜间 + 末地)"
     );
     public static final SlimefunItemStack ULTIMATE_SOLAR_PANEL = new SlimefunItemStack(
         "ULTIMATE_SOLAR_PANEL",
         Material.PURPLE_GLAZED_TERRACOTTA,
-        "&5&lUltimate Solar Panel",
-        "&9Works at Night",
+        "&5&l终极太阳能板",
+        "&9可以在夜间工作",
         "",
         LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.ULTIMATE_STORAGE),
-        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ULTIMATE_DAY_RATE) + " (Day)",
-        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ULTIMATE_NIGHT_RATE) + " (Night)"
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ULTIMATE_DAY_RATE) + " (日间)",
+        LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ULTIMATE_NIGHT_RATE) + " (夜间)"
     );
     public static final SlimefunItemStack MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT = new SlimefunItemStack(
         "MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT",
@@ -375,88 +375,88 @@ public final class Items {
     public static final SlimefunItemStack GOLD_PLATE = new SlimefunItemStack(
         "GOLD_PLATE",
         Material.YELLOW_CARPET,
-        "&7Gold Plate"
+        "&7金板"
     );
     public static final SlimefunItemStack GOLD_ITEM_CASING = new SlimefunItemStack(
         "GOLD_ITEM_CASING",
         Material.YELLOW_CARPET,
-        "&7Gold Item Casing"
+        "&7金制外壳"
     );
     public static final SlimefunItemStack UNINSULATED_GOLD_CABLE = new SlimefunItemStack(
         "UNINSULATED_GOLD_CABLE",
         Material.STRING,
-        "&7Uninsulated Gold Cable"
+        "&7金质导线"
     );
     public static final SlimefunItemStack GOLD_CABLE = new SlimefunItemStack(
         "GOLD_CABLE",
         Material.STRING,
-        "&7Gold Cable"
+        "&7绝缘金质导线"
     );
     //Basic Machines
     public static final SlimefunItemStack REFINED_SMELTERY = new SlimefunItemStack(
         "REFINED_SMELTERY",
         Material.BLAST_FURNACE,
-        "&7Refined Smeltery"
+        "&7高炉"
     );
 
     public static final SlimefunItemStack METAL_FORGE = new SlimefunItemStack(
         "METAL_FORGE",
         Material.DISPENSER,
-        "&7Metal Forge"
+        "&7金属锻造炉"
     );
 
     public static final SlimefunItemStack MANUAL_MILL = new SlimefunItemStack(
         "MANUAL_MILL",
         Material.DISPENSER,
-        "&7Manual Mill"
+        "&7手摇式磨具"
     );
 
     public static final SlimefunItemStack GENERATOR = new SlimefunItemStack(
         "GENERATOR",
         Material.IRON_BLOCK,
-        "&7Generator"
+        "&7发电机"
     );
 
     public static final SlimefunItemStack RE_BATTERY = new SlimefunItemStack(
         "RE_BATTERY",
         Material.GLASS_BOTTLE,
-        "&7RE Battery"
+        "&7可充电电池"
     );
 
     public static final SlimefunItemStack ADVANCED_SOLAR_HELMET = new SlimefunItemStack(
         "ADVANCED_SOLAR_HELMET",
         Material.IRON_HELMET,
-        "&7Advanced Solar Helmet"
+        "&7高级太阳能头盔"
     );
 
     public static final SlimefunItemStack CARBONADO_SOLAR_HELMET = new SlimefunItemStack(
         "CARBONADO_SOLAR_HELMET",
         Material.GOLDEN_HELMET,
-        "&7Carbonado Solar Helmet"
+        "&7黑金刚石太阳能头盔"
     );
 
     public static final SlimefunItemStack ENERGIZED_SOLAR_HELMET = new SlimefunItemStack(
         "ENERGIZED_SOLAR_HELMET",
         Material.GOLDEN_HELMET,
-        "&7Energized Solar Helmet"
+        "&7充能太阳能头盔"
     );
 
     public static final SlimefunItemStack ADVANCEDLX_SOLAR_HELMET = new SlimefunItemStack(
         "ADVANCEDLX_SOLAR_HELMET",
         Material.DIAMOND_HELMET,
-        "&7Super Advanced Solar Helmet"
+        "&7超级太阳能头盔"
     );
 
     public static final SlimefunItemStack HYBRID_SOLAR_HELMET = new SlimefunItemStack(
         "HYBRID_SOLAR_HELMET",
         Material.DIAMOND_HELMET,
-        "&7Hybrid Solar Helmet"
+        "&7混合太阳能头盔"
     );
 
     public static final SlimefunItemStack ULTIMATE_SOLAR_HELMET = new SlimefunItemStack(
         "ULTIMATE_SOLAR_HELMET",
         Material.DIAMOND_HELMET,
-        "&7Ultimate Solar Helmet"
+        "&7终极太阳能头盔"
     );
 
     public static final SlimefunItemStack FOOD_SYNTHESIZER = new SlimefunItemStack(
@@ -477,30 +477,30 @@ public final class Items {
     public static final SlimefunItemStack IRON_PLATE = new SlimefunItemStack(
         "IRON_PLATE",
         Material.WHITE_CARPET,
-        "&7Iron Plate"
+        "&7铁板"
     );
 
     public static final SlimefunItemStack DIAMOND_PLATE = new SlimefunItemStack(
         "DIAMOND_PLATE",
         Material.CYAN_CARPET,
-        "&7Diamond Plate"
+        "&7钻石板"
     );
     public static final SlimefunItemStack THORIUM_PLATE = new SlimefunItemStack(
         "THORIUM_PLATE",
         Material.GRAY_CARPET,
-        "&7Thorium Plate"
+        "&7钍板"
     );
 
     public static final SlimefunItemStack POWER_UNIT = new SlimefunItemStack(
         "POWER_UNIT",
         Material.GOLDEN_HOE,
-        "&7Power Unit"
+        "&7驱动把手"
     );
 
     public static final SlimefunItemStack IRON_ITEM_CASING = new SlimefunItemStack(
         "IRON_ITEM_CASING",
         Material.GRAY_CARPET,
-        "&7Iron Item Casing"
+        "&7铁质外壳"
     );
 
     //////////////////////////
@@ -509,34 +509,34 @@ public final class Items {
     public static final SlimefunItemStack LAPIS_DUST = new SlimefunItemStack(
         "LAPIS_DUST",
         Material.PURPLE_DYE,
-        "&7Lapiz Dust"
+        "&7青金石粉"
     );
 
     public static final SlimefunItemStack REDSTONE_DUST = new SlimefunItemStack(
         "REDSTONE_DUST",
         Material.RED_DYE,
-        "&7Redstone Dust"
+        "&7红石粉"
     );
 
     public static final SlimefunItemStack DIAMOND_DUST = new SlimefunItemStack(
         "DIAMOND_DUST",
         Material.CYAN_DYE,
-        "&7Diamond Dust"
+        "&7钻石粉"
     );
     public static final SlimefunItemStack EMERALD_DUST = new SlimefunItemStack(
         "EMERALD_DUST",
         Material.LIME_DYE,
-        "&7Emerald Dust"
+        "&7绿宝石粉"
     );
     public static final SlimefunItemStack QUARTZ_DUST = new SlimefunItemStack(
         "QUARTZ_DUST",
         Material.WHITE_DYE,
-        "&7Quartz Dust"
+        "&7石英粉"
     );
     public static final SlimefunItemStack ANCIENT_DEBRIS_DUST = new SlimefunItemStack(
         "ANCIENT_DEBRIS_DUST",
         Material.BROWN_DYE,
-        "&7Ancient Debris Dust"
+        "&7远古残骸粉"
     );
 
     private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);

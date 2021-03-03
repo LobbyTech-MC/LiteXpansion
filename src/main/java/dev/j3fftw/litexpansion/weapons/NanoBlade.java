@@ -54,11 +54,11 @@ public class NanoBlade extends SimpleSlimefunItem<ItemUseHandler> implements Rec
 
             if (enabled && getItemCharge(event.getItem()) > getRemovedChargePerTick()) {
                 nanoBladeMeta.addEnchant(enchantment, 1, false);
-                nanoBladeMeta.setDisplayName(ChatColor.DARK_GREEN + "Nano Blade" + ChatColor.GREEN + " (On)");
+                nanoBladeMeta.setDisplayName(ChatColor.DARK_GREEN + "纳米剑" + ChatColor.GREEN + " (开)");
 
                 damage = 13; // Base is 7 so 7 + 13 = 20
             } else {
-                nanoBladeMeta.setDisplayName(ChatColor.DARK_GREEN + "Nano Blade" + ChatColor.RED + " (Off)");
+                nanoBladeMeta.setDisplayName(ChatColor.DARK_GREEN + "纳米剑" + ChatColor.RED + " (关)");
 
                 damage = -3; // Base is 7 so 7 - 3 = 4
             }

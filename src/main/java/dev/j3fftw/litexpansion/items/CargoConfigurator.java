@@ -121,7 +121,7 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
     ) {
         PersistentDataAPI.remove(meta, CARGO_BLOCK);
         PersistentDataAPI.remove(meta, CARGO_CONFIG);
-        player.sendMessage(ChatColor.RED + "Cleared node configuration!");
+        player.sendMessage(ChatColor.RED + "已清除该货运节点的配置!");
 
         if (lore.size() != defaultLore.size()) {
             lore.clear();
@@ -139,18 +139,18 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
             final String copiedBlock = PersistentDataAPI.getString(meta, CARGO_BLOCK);
             final String config = PersistentDataAPI.getString(meta, CARGO_CONFIG);
             if (copiedBlock == null || config == null) {
-                e.getPlayer().sendMessage(ChatColor.RED + "You do not have a config copied!");
+                e.getPlayer().sendMessage(ChatColor.RED + "你必须先复制一个节点的配置!");
                 return;
             }
 
             if (!copiedBlock.equals(blockId)) {
-                e.getPlayer().sendMessage(ChatColor.RED + "You can't apply the config to this node!");
+                e.getPlayer().sendMessage(ChatColor.RED + "你不能复制配置到这个节点上!");
                 return;
             }
 
             BlockStorage.setBlockInfo(e.getClickedBlock(), config, true);
             BlockStorage.getStorage(e.getClickedBlock().getWorld()).reloadInventory(e.getClickedBlock().getLocation());
-            e.getPlayer().sendMessage(ChatColor.GREEN + "Applied configuration!");
+            e.getPlayer().sendMessage(ChatColor.GREEN + "已黏贴配置!");
         } else if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             PersistentDataAPI.setString(meta, CARGO_BLOCK, blockId);
             PersistentDataAPI.setString(meta, CARGO_CONFIG, BlockStorage.getBlockInfoAsJson(e.getClickedBlock()));
@@ -160,11 +160,11 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
                 lore.clear();
                 lore.addAll(defaultLore);
             }
-            lore.addAll(Arrays.asList("", ChatColor.GRAY + "> Copied "
+            lore.addAll(Arrays.asList("", ChatColor.GRAY + "> 物品 "
                 + ChatColor.RESET + clickedItemStack.getItemMeta().getDisplayName()
-                + ChatColor.GRAY + " config!"
+                + ChatColor.GRAY + " 的配置"
             ));
-            e.getPlayer().sendMessage(ChatColor.GREEN + "Copied node configuration!");
+            e.getPlayer().sendMessage(ChatColor.GREEN + "成功复制节点配置!");
         }
     }
 }

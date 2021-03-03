@@ -42,7 +42,7 @@ public class ThoriumResource implements GEOResource {
     @Nonnull
     @Override
     public String getName() {
-        return "Thorium";
+        return "钍";
     }
 
     @Nonnull

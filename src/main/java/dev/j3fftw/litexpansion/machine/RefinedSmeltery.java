@@ -16,7 +16,7 @@ public class RefinedSmeltery extends CraftingMultiBlock {
         new NamespacedKey(LiteXpansion.getInstance(), "refined_smeltery"),
         Items.REFINED_SMELTERY,
         "",
-        "&7Used to refine ingots"
+        "&7用于精炼金属"
     );
 
     private static final ItemStack stone_bricks = new ItemStack(Material.STONE_BRICKS);
