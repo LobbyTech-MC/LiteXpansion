@@ -73,6 +73,24 @@ public class AdvancedSolarHelmet extends SolarHelmet {
 
         @Nonnull
         private final ItemStack[] recipe;
+
+		Type(SlimefunItemStack item, int generationRate, ItemStack[] itemStacks) {
+			this.item = item;
+			this.GenerationRate = generationRate;
+			this.recipe = itemStacks;
+		}
+
+		SlimefunItemStack getItem() {
+			return this.item;
+		}
+
+		ItemStack[] getRecipe() {
+			return this.recipe;
+		}
+
+		int getGenerationRate() {
+			return this.GenerationRate;
+		}
     }
 }
 

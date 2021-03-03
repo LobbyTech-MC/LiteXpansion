@@ -30,7 +30,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
 
     private static final int PROGRESS_SLOT = 4;
     private static final CustomItem generatingItem = new CustomItem(Material.ORANGE_STAINED_GLASS_PANE,
-        "&cNot Generating..."
+        "&c不在发电..."
     );
     public static int ADVANCED_DAY_RATE = 80;
     public static int ADVANCED_NIGHT_RATE = 10;
@@ -178,5 +178,35 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
 
         @Nonnull
         private final ItemStack[] recipe;
+
+		Type(SlimefunItemStack item, int dayGenerationRate, int nightGenerationRate, int output,
+				int storage, ItemStack[] itemStacks) {
+			this.recipe = itemStacks;
+			this.dayGenerationRate = dayGenerationRate;
+			this.nightGenerationRate = nightGenerationRate;
+			this.item = item;
+			this.output = output;
+			this.storage = storage;
+		}
+
+		ItemStack[] getRecipe() {
+			return this.recipe;
+		}
+
+		int getStorage() {
+			return this.storage;
+		}
+
+		int getNightGenerationRate() {
+			return this.nightGenerationRate;
+		}
+
+		int getDayGenerationRate() {
+			return this.dayGenerationRate;
+		}
+
+		SlimefunItemStack getItem() {
+			return this.item;
+		}
     }
 }
