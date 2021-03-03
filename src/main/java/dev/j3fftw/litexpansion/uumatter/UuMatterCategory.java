@@ -5,10 +5,11 @@ import dev.j3fftw.litexpansion.LiteXpansion;
 import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
 import io.github.thebusybiscuit.slimefun4.core.categories.FlexCategory;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
-import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuideLayout;
+import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuideMode;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
@@ -32,13 +33,14 @@ public final class UuMatterCategory extends FlexCategory {
         );
     }
 
-    private ChestMenu create(Player p) {
+    private ChestMenu create(@Nonnull Player p) {
         final ChestMenu playerMenu = new ChestMenu(SlimefunPlugin.getLocalization().getMessage(p, "guide.title.main"));
         playerMenu.setEmptySlotsClickable(false);
         return playerMenu;
     }
 
-    private void displayItem(PlayerProfile profile, ItemStack result) {
+    @ParametersAreNonnullByDefault
+    private void displayItem(PlayerProfile profile, ItemStack result, SlimefunGuideMode mode) {
         final Player p = profile.getPlayer();
         if (p != null) {
             final ChestMenu menu = this.create(p);
@@ -50,7 +52,7 @@ public final class UuMatterCategory extends FlexCategory {
                         ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(p, "guide.back.guide")))
                     );
                     menu.addMenuClickHandler(i, (pl, s, is, action) -> {
-                        open(p, profile, SlimefunGuideLayout.CHEST);
+                        open(p, profile, mode);
                         return false;
                     });
                 } else {
@@ -74,6 +76,7 @@ public final class UuMatterCategory extends FlexCategory {
         }
     }
 
+    @ParametersAreNonnullByDefault
     private void displayItem(ChestMenu menu, Player p, PlayerProfile profile, ItemStack output, ItemStack[] recipe) {
         final ChestMenu.MenuClickHandler clickHandler = (pl, s, clickedItem, a) -> onIngredientClick(profile,
             clickedItem);
@@ -98,13 +101,13 @@ public final class UuMatterCategory extends FlexCategory {
 
     @Override
     public boolean isVisible(@Nonnull Player player, @Nonnull PlayerProfile playerProfile,
-                             @Nonnull SlimefunGuideLayout slimefunGuideLayout) {
+                             @Nonnull SlimefunGuideMode slimefunGuideLayout) {
         // This implementation makes little sense in a Cheat Sheet context
-        return slimefunGuideLayout != SlimefunGuideLayout.CHEAT_SHEET;
+        return slimefunGuideLayout != SlimefunGuideMode.CHEAT_MODE;
     }
 
     @Override
-    public void open(Player player, PlayerProfile playerProfile, SlimefunGuideLayout slimefunGuideLayout) {
+    public void open(Player player, PlayerProfile playerProfile, SlimefunGuideMode slimefunGuideLayout) {
         ChestMenu menu = new ChestMenu("&5UU-Matter Recipes");
 
         // Header
@@ -115,19 +118,18 @@ public final class UuMatterCategory extends FlexCategory {
         menu.setEmptySlotsClickable(false);
 
         menu.addItem(1, new CustomItem(ChestMenuUtils.getBackButton(player, "",
-            ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(player, "guide.back.guide")))
+            ChatColor.GRAY + SlimefunPlugin.getLocalization().getMessage(player, "guide.back.guide"))),
+            (pl, slot, item, action) -> {
+                SlimefunGuide.openMainMenu(playerProfile, slimefunGuideLayout, 1);
+                return false;
+            }
         );
-
-        menu.addMenuClickHandler(1, (pl, slot, item, action) -> {
-            SlimefunPlugin.getRegistry().getGuideLayout(slimefunGuideLayout).openMainMenu(playerProfile, 1);
-            return false;
-        });
 
         // Other items
         int i = 9;
         for (ItemStack item : UUMatter.INSTANCE.getRecipes().keySet()) {
             menu.addItem(i++, item, (v0, v1, v2, v3) -> {
-                displayItem(playerProfile, item);
+                displayItem(playerProfile, item, slimefunGuideLayout);
                 return false;
             });
         }

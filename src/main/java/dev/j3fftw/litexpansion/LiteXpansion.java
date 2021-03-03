@@ -1,28 +1,30 @@
 package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.litexpansion.resources.ThoriumResource;
+import dev.j3fftw.litexpansion.ticker.PassiveElectricRemovalTicker;
 import dev.j3fftw.litexpansion.utils.Constants;
+import dev.j3fftw.litexpansion.utils.Reflections;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.core.researching.Research;
-import java.io.File;
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import javax.annotation.Nonnull;
+import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
 import org.bstats.bukkit.Metrics;
+import org.bstats.charts.AdvancedPie;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import javax.annotation.Nonnull;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
@@ -30,7 +32,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public void onEnable() {
-        instance = this;
+        setInstance(this);
 
         if (!new File(getDataFolder(), "config.yml").exists()) {
             saveDefaultConfig();
@@ -43,29 +45,21 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
         }
 
-        // Enchantment
-        try {
-            if (!Enchantment.isAcceptingRegistrations()) {
-                Field accepting = Enchantment.class.getDeclaredField("acceptingNew");
-                accepting.setAccessible(true);
-                accepting.set(null, true);
-            }
-        } catch (IllegalAccessException | NoSuchFieldException ignored) {
-            getLogger().warning("Failed to register enchantment. Seems the 'acceptingNew' field changed monkaS");
-        }
-
         registerEnchantments();
+
+        getServer().getScheduler().runTask(this, this::changeSfValues);
 
         ItemSetup.INSTANCE.init();
 
         getServer().getPluginManager().registerEvents(new Events(), this);
 
-        // Armor
-
         UUMatter.INSTANCE.register();
 
         setupResearches();
         new ThoriumResource().register();
+
+        final PassiveElectricRemovalTicker perTicker = new PassiveElectricRemovalTicker();
+        getServer().getScheduler().runTaskTimerAsynchronously(this, perTicker, 20, 20);
 
 //        if (Wrench.wrenchFailChance.getValue() < 0
 //            || Wrench.wrenchFailChance.getValue() > 1
@@ -77,10 +71,14 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     @Override
     public void onDisable() {
-        instance = null;
+        setInstance(null);
     }
 
     private void registerEnchantments() {
+        if (!Enchantment.isAcceptingRegistrations()) {
+            Reflections.setStaticField(Enchantment.class, "acceptingNew", true);
+        }
+
         Enchantment glowEnchantment = new GlowEnchant(Constants.GLOW_ENCHANT, new String[] {
             "ADVANCED_CIRCUIT", "NANO_BLADE", "GLASS_CUTTER", "LAPOTRON_CRYSTAL",
             "ADVANCEDLX_SOLAR_HELMET", "HYBRID_SOLAR_HELMET", "ULTIMATE_SOLAR_HELMET",
@@ -91,6 +89,21 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         if (Enchantment.getByKey(glowEnchantment.getKey()) == null) {
             Enchantment.registerEnchantment(glowEnchantment);
         }
+    }
+
+    private void changeSfValues() {
+        // Vanilla SF
+        final SlimefunItem energizedPanel = SlimefunItem.getByID("SOLAR_GENERATOR_3");
+        if (energizedPanel != null) {
+            Reflections.setField(energizedPanel, "dayEnergy", 64);
+            Reflections.setField(energizedPanel, "nightEnergy", 32);
+        }
+
+        // InfinityExpansion - Halved all values and made infinite panel much less
+        Reflections.setField(SlimefunItem.getByID("ADVANCED_PANEL"), "generation", 75);
+        Reflections.setField(SlimefunItem.getByID("CELESTIAL_PANEL"), "generation", 250);
+        Reflections.setField(SlimefunItem.getByID("VOID_PANEL"), "generation", 1200);
+        Reflections.setField(SlimefunItem.getByID("INFINITE_PANEL"), "generation", 20_000);
     }
 
     private void setupResearches() {
@@ -191,33 +204,22 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     }
 
     private void setupCustomMetrics(@Nonnull Metrics metrics) {
-        metrics.addCustomChart(new Metrics.AdvancedPie("blocks_placed", () -> {
+        metrics.addCustomChart(new AdvancedPie("blocks_placed", () -> {
             final Map<String, Integer> data = new HashMap<>();
-            try {
-                Class<?> blockStorage = Class.forName("me.mrCookieSlime.Slimefun.api.BlockStorage");
+            for (World world : Bukkit.getWorlds()) {
+                final BlockStorage storage = BlockStorage.getStorage(world);
+                if (storage == null) {
+                    continue;
+                }
 
-                for (World world : Bukkit.getWorlds()) {
-                    final BlockStorage storage = BlockStorage.getStorage(world);
-                    if (storage == null) {
+                for (Map.Entry<Location, Config> entry : storage.getRawStorage().entrySet()) {
+                    final SlimefunItem item = SlimefunItem.getByID(entry.getValue().getString("id"));
+                    if (item == null || !(item.getAddon() instanceof LiteXpansion)) {
                         continue;
                     }
 
-                    final Field f = blockStorage.getDeclaredField("storage");
-                    f.setAccessible(true);
-                    @SuppressWarnings("unchecked") final Map<Location, Config> blocks =
-                        (Map<Location, Config>) f.get(storage);
-
-                    for (Map.Entry<Location, Config> entry : blocks.entrySet()) {
-                        final SlimefunItem item = SlimefunItem.getByID(entry.getValue().getString("id"));
-                        if (item == null || !(item.getAddon() instanceof LiteXpansion)) {
-                            continue;
-                        }
-
-                        data.merge(item.getId(), 1, Integer::sum);
-                    }
+                    data.merge(item.getId(), 1, Integer::sum);
                 }
-            } catch (ReflectiveOperationException e) {
-                getLogger().log(Level.WARNING, "Failed to load placed blocks", e);
             }
             return data;
         }));
@@ -229,14 +231,14 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     }
 
     public String getBugTrackerURL() {
-        return "https://github.com/J3fftw1/LiteXpansion/issues";
+        return "https://github.com/Slimefun-Addon-Community/LiteXpansion/issues";
+    }
+
+    private static void setInstance(LiteXpansion ins) {
+        instance = ins;
     }
 
     public static LiteXpansion getInstance() {
         return instance;
-    }
-
-    public static FileConfiguration getCfg() {
-        return instance.getConfig();
     }
 }

@@ -11,6 +11,7 @@ import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.Thorium;
 import dev.j3fftw.litexpansion.machine.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.Generator;
+import dev.j3fftw.litexpansion.machine.Macerator;
 import dev.j3fftw.litexpansion.machine.ManualMill;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.MetalForge;
@@ -20,8 +21,10 @@ import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RefinedSmeltery;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
+import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
 import io.github.thebusybiscuit.slimefun4.implementation.items.blocks.UnplaceableBlock;
 import io.github.thebusybiscuit.slimefun4.implementation.items.multiblocks.OreCrusher;
 import javax.annotation.Nonnull;
@@ -77,6 +80,7 @@ final class ItemSetup {
         new MultiFunctionalStorageUnit().register(LiteXpansion.getInstance());
         new Generator().register(LiteXpansion.getInstance());
         new ManualMill().register(LiteXpansion.getInstance());
+        new Macerator().register(LiteXpansion.getInstance());
     }
 
     //Disable when SlimyTreeTaps exists
@@ -199,6 +203,30 @@ final class ItemSetup {
         registerNonPlaceableItem(Items.REFINED_IRON, RefinedSmeltery.RECIPE_TYPE,
             new ItemStack(Material.IRON_INGOT)
         );
+
+        // Dust smelting
+        RecipeType.SMELTERY.register(new ItemStack[] {Items.LAPIS_DUST},
+            new ItemStack(Material.LAPIS_LAZULI)
+        );
+        RecipeType.SMELTERY.register(new ItemStack[] {Items.REDSTONE_DUST},
+            new ItemStack(Material.REDSTONE)
+        );
+        RecipeType.SMELTERY.register(new ItemStack[] {Items.DIAMOND_DUST},
+            new ItemStack(Material.DIAMOND)
+        );
+        RecipeType.SMELTERY.register(new ItemStack[] {Items.EMERALD_DUST},
+            new ItemStack(Material.EMERALD)
+        );
+        RecipeType.SMELTERY.register(new ItemStack[] {Items.QUARTZ_DUST},
+            new ItemStack(Material.QUARTZ)
+        );
+
+        // 1.16
+        if (SlimefunPlugin.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_16)) {
+            RecipeType.SMELTERY.register(new ItemStack[] {Items.ANCIENT_DEBRIS_DUST},
+                new ItemStack(Material.NETHERITE_INGOT)
+            );
+        }
 
         // Resources
         new MagThor().register(plugin);
