@@ -69,7 +69,7 @@ public class AdvancedSolarHelmet extends SolarHelmet {
 
         @Nonnull
         private final SlimefunItemStack item;
-        private final int generationRate;
+        private final int GenerationRate;
 
         @Nonnull
         private final ItemStack[] recipe;
