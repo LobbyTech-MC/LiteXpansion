@@ -24,7 +24,7 @@ public final class Items {
     public static final Category LITEXPANSION = new Category(
         new NamespacedKey(LiteXpansion.getInstance(), "litexpansion"),
         new CustomItem(SkullItem.fromHash("3f87fc5cbb233743a82fb0fa51fe739487f29bcc01c9026621ecefad197f4fb1"),
-            "&7LiteXpansion")
+            "&7UU物质机器")
     );
     public static final SlimefunItemStack ELECTRIC_CHESTPLATE = new SlimefunItemStack(
         "ELECTRIC_CHESTPLATE",
