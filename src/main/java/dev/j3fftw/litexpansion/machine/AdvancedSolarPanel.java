@@ -208,5 +208,9 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
 		SlimefunItemStack getItem() {
 			return this.item;
 		}
+
+		public int getOutput() {
+			return output;
+		}
     }
 }
