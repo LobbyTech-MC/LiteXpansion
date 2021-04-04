@@ -1,7 +1,15 @@
 package dev.j3fftw.litexpansion;
 
-import dev.j3fftw.litexpansion.armor.ElectricChestplate;
-import dev.j3fftw.litexpansion.catergory.MainCategory;
+import java.io.File;
+
+import javax.annotation.Nonnull;
+
+import org.bstats.MetricsBase;
+import org.bstats.bukkit.Metrics;
+import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import dev.j3fftw.litexpansion.resources.ThoriumResource;
 import dev.j3fftw.litexpansion.ticker.PassiveElectricRemovalTicker;
 import dev.j3fftw.litexpansion.utils.Constants;
@@ -39,7 +47,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         getServer().getScheduler().runTask(this, this::changeSfValues);
 
         ItemSetup.INSTANCE.init();
-        MainCategory.INSTANCE.register();
 
         getServer().getPluginManager().registerEvents(new Events(), this);
 
