@@ -15,7 +15,7 @@ public final class Utils {
     private Utils() {}
 
     public static void send(Player player, String message) {
-        player.sendMessage(ChatColor.GRAY + "[无尽科技] " + ChatColors.color(message));
+        player.sendMessage(ChatColor.GRAY + "[UU物质机器] " + ChatColors.color(message));
     }
 
     public static Optional<Boolean> getOptionalBoolean(@Nonnull ItemMeta meta, @Nonnull NamespacedKey key) {
