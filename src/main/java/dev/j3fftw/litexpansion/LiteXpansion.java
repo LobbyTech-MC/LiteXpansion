@@ -24,6 +24,8 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     private static LiteXpansion instance;
 
+    private final MetricsService metricsService = new MetricsService();
+
     @Override
     public void onEnable() {
         setInstance(this);
@@ -33,10 +35,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         }
 
         final Metrics metrics = new Metrics(this, 7111);
-        // TODO: Disabled for the min, seems to have caused a spike on some servers.
-        // Probably due to the immutable copy made by getRawStorage
-        // This could be switched back to reflection if we want it to be quick again
-//        setupCustomMetrics(metrics);
+        metricsService.setup(metrics);
 
         if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
             new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
@@ -44,7 +43,9 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
         registerEnchantments();
 
-        getServer().getScheduler().runTask(this, this::changeSfValues);
+        if (getConfig().getBoolean("options.nerf-other-addons", true)) {
+            getServer().getScheduler().runTask(this, this::nerfCrap);
+        }
 
         ItemSetup.INSTANCE.init();
 
@@ -65,7 +66,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 //            getServer().getPluginManager().disablePlugin(this);
 //        }
 
-        forceMetricsPush(metrics);
+//        forceMetricsPush(metrics);
     }
 
     @Override
@@ -90,7 +91,7 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         }
     }
 
-    private void changeSfValues() {
+    private void nerfCrap() {
         // Vanilla SF
         final SlimefunItem energizedPanel = SlimefunItem.getByID("SOLAR_GENERATOR_3");
         if (energizedPanel != null) {
