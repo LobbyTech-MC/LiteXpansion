@@ -4,8 +4,6 @@ import java.io.File;
 
 import javax.annotation.Nonnull;
 
-import org.bstats.MetricsBase;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,7 +22,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     private static LiteXpansion instance;
 
-    private final MetricsService metricsService = new MetricsService();
 
     @Override
     public void onEnable() {
@@ -34,8 +31,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             saveDefaultConfig();
         }
 
-        final Metrics metrics = new Metrics(this, 7111);
-        metricsService.setup(metrics);
 
         if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
             new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
@@ -201,11 +196,6 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
             .addItems(Items.HYBRID_SOLAR_HELMET, Items.ADVANCED_SOLAR_HELMET, Items.ADVANCEDLX_SOLAR_HELMET,
                 Items.CARBONADO_SOLAR_HELMET, Items.ENERGIZED_SOLAR_HELMET, Items.ULTIMATE_SOLAR_HELMET)
             .register();
-    }
-
-    private void forceMetricsPush(@Nonnull Metrics metrics) {
-        MetricsBase base = (MetricsBase) Reflections.getField(Metrics.class, metrics, "metricsBase");
-        Reflections.invoke(MetricsBase.class, base, "submitData");
     }
 
     @Nonnull
