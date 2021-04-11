@@ -54,15 +54,6 @@ public final class Items {
 
     //region Weapon
     // Tools
-    public static final SlimefunItemStack WRENCH = new SlimefunItemStack(
-        "WRENCH",
-        Material.GOLDEN_HOE,
-        "&6扳手",
-        "",
-        "&7右键任何机器, 发电机, 电容器,",
-        "&7或者货运节点都会瞬间拆下!",
-        ""
-    );
     public static final SlimefunItemStack GLASS_CUTTER = new SlimefunItemStack(
         "GLASS_CUTTER",
         Material.GHAST_TEAR,
