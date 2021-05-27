@@ -6,6 +6,7 @@ import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.LoreBuilderDynamic;
+import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -32,7 +33,7 @@ public final class Items {
         "",
         "&8\u21E8 &7抵消所有对自身的伤害.",
         "",
-        "&c&o&8\u21E8 &e\u26A1 &70 / 250 J"
+        "&c&o&8\u21E8 &e\u26A1 &70 / 8192 J"
     );
 
     // Armor
@@ -46,7 +47,7 @@ public final class Items {
         "",
         "&f开关: &a右键",
         "",
-        "&8\u21E8 &7每次攻击消耗 &e10J",
+        "&c&o&8\u21E8 &e\u26A1 &70 / " + NanoBlade.CAPACITY + " J",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 500 J"
     );
@@ -144,17 +145,6 @@ public final class Items {
         "&7铜质外壳"
     );
 
-    public static final SlimefunItemStack FOOD_SYNTHESIZER = new SlimefunItemStack(
-        "FOOD_SYNTHESIZER",
-        new CustomItem(SkullItem.fromHash("a967efe969d264f635f2c201c34381ef59c72e16ec50af7692033121e22fba9c"),
-            "食物合成器"),
-        "&d食物合成器",
-        "",
-        "&f用合成的食物填报你的肚子.",
-        "&f还有多种口味!",
-        "",
-        "&c&o&8\u21E8 &e\u26A1 &70 / 100 J"
-    );
     public static final SlimefunItemStack MAG_THOR = new SlimefunItemStack(
         "MAG_THOR",
         Material.IRON_INGOT,
@@ -238,8 +228,13 @@ public final class Items {
         Material.COBWEB,
         "&7高级电路板"
     );
-    ////////////////
-    // CARBON CRAP
+
+    //endregion
+
+    //region Carbon Crap
+    //////////////////////////
+    // Carbon Crap
+    //////////////////////////
     public static final SlimefunItemStack COAL_DUST = new SlimefunItemStack(
         "COAL_DUST",
         Material.BLACK_DYE,
@@ -460,6 +455,18 @@ public final class Items {
         "ULTIMATE_SOLAR_HELMET",
         Material.DIAMOND_HELMET,
         "&7终极太阳能头盔"
+    );
+
+    public static final SlimefunItemStack FOOD_SYNTHESIZER = new SlimefunItemStack(
+            "FOOD_SYNTHESIZER",
+            new CustomItem(SkullItem.fromHash("a967efe969d264f635f2c201c34381ef59c72e16ec50af7692033121e22fba9c"),
+                    "食物合成器"),
+            "&d食物合成器",
+            "",
+            "&f用合成的食物填报你的肚子.",
+            "&f还有多种口味!",
+            "",
+            "&c&o&8\u21E8 &e\u26A1 &70 / 100 J"
     );
 
     public static final SlimefunItemStack IRON_PLATE = new SlimefunItemStack(

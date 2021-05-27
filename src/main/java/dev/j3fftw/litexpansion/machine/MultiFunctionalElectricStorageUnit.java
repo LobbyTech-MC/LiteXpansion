@@ -16,4 +16,5 @@ public class MultiFunctionalElectricStorageUnit extends Capacitor {
                 Items.GOLD_CABLE, SlimefunItems.POWER_CRYSTAL, Items.GOLD_CABLE
             });
     }
+
 }

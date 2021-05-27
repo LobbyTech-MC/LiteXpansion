@@ -1,7 +1,9 @@
 package dev.j3fftw.litexpansion.utils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public final class Reflections {
 
@@ -18,7 +20,9 @@ public final class Reflections {
         }
     }
 
-    public static void setField(@Nonnull Object instance, @Nonnull String fieldName, @Nonnull Object newValue) {
+    public static void setField(@Nullable Object instance, @Nonnull String fieldName, @Nonnull Object newValue) {
+        if (instance == null) return;
+
         try {
             final Field f = instance.getClass().getDeclaredField(fieldName);
             f.setAccessible(true); // NOSONAR
@@ -26,6 +30,29 @@ public final class Reflections {
             f.set(instance, newValue); // NOSONAR
         } catch (ReflectiveOperationException e) {
             Log.warn("Failed to change field {} to {} in {}", fieldName, newValue, instance.getClass().getSimpleName());
+        }
+    }
+
+    public static Object getField(@Nonnull Class<?> clazz, @Nullable Object instance, @Nonnull String fieldName) {
+        try {
+            final Field f = clazz.getDeclaredField(fieldName);
+            f.setAccessible(true); // NOSONAR
+
+            return f.get(instance);
+        } catch (ReflectiveOperationException e) {
+            Log.warn("Failed to get field {} in {}", fieldName, clazz.getSimpleName());
+            return null;
+        }
+    }
+
+    public static void invoke(@Nonnull Class<?> clazz, @Nullable Object instance, @Nonnull String methodName) {
+        try {
+            final Method m = clazz.getDeclaredMethod(methodName);
+            m.setAccessible(true); // NOSONAR
+
+            m.invoke(instance);
+        } catch (ReflectiveOperationException e) {
+            Log.warn("Failed to invoke method {} in {}", methodName, clazz.getSimpleName());
         }
     }
 }
