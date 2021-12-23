@@ -42,7 +42,7 @@ public final class UUMatter {
             try {
                 Files.copy(this.getClass().getResourceAsStream("/uumatter.yml"), uuMatterFile.toPath());
             } catch (IOException e) {
-                LiteXpansion.getInstance().getLogger().log(Level.SEVERE, "复制默认合成表失败 (uumatter.yml)", e);
+                LiteXpansion.getInstance().getLogger().log(Level.SEVERE, "复制默认配方失败 (uumatter.yml)", e);
             }
         }
 
@@ -64,7 +64,7 @@ public final class UUMatter {
             this.recipes.put(output, recipe);
             addUuMatterRecipe(output, recipe);
         }
-        LiteXpansion.getInstance().getLogger().log(Level.INFO, "成功加载了 {0} 个 UU 物质合成配方", new Object[] {
+        LiteXpansion.getInstance().getLogger().log(Level.INFO, "成功加载了 {0} 个 纳米物质合成配方", new Object[] {
             this.recipes.size()
         });
 

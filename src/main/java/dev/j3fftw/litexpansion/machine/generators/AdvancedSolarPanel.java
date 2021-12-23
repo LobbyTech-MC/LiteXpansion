@@ -43,7 +43,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
     public static final int ULTIMATE_STORAGE = 10_000_000;
     private static final int PROGRESS_SLOT = 4;
     private static final CustomItemStack generatingItem = new CustomItemStack(Material.ORANGE_STAINED_GLASS_PANE,
-        "&cNot Generating..."
+        "&c不在发电..."
     );
     private final Type type;
 

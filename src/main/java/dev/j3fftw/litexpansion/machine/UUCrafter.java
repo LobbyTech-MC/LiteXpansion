@@ -38,11 +38,11 @@ public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNet
     public static final int[] CRAFTING_SLOTS = {12, 13, 14, 21, 22, 23, 30, 31, 32};
     public static final int START_STOP = 40;
     public static final CustomItemStack RUNNING = new CustomItemStack(
-        Material.GREEN_STAINED_GLASS_PANE, ChatColor.GRAY + "Click to stop"
+        Material.GREEN_STAINED_GLASS_PANE, ChatColor.GRAY + "点击停止"
     );
 
     public static final CustomItemStack NOT_RUNNING = new CustomItemStack(
-        Material.RED_STAINED_GLASS_PANE, ChatColor.GRAY + "Click to start"
+        Material.RED_STAINED_GLASS_PANE, ChatColor.GRAY + "点击开始"
     );
 
     protected static final Map<Location, Boolean> whatIsRunning = new HashMap<>();
@@ -122,7 +122,7 @@ public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNet
     }
 
     public void setup() {
-        new BlockMenuPresetTest(this.getId(), "&8UU Crafter", this);
+        new BlockMenuPresetTest(this.getId(), "&8纳米物质合成机", this);
     }
 
     public void onNewInstance(BlockMenu menu, Block block) {

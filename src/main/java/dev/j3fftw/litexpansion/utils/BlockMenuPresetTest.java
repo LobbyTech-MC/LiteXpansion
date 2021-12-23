@@ -50,7 +50,7 @@ public class BlockMenuPresetTest extends BlockMenuPreset {
         addItem(UUCrafter.START_STOP,
             new CustomItemStack(
                 Material.RED_STAINED_GLASS_PANE,
-                "&7Click to start"
+                "&7点击开始"
             )
         );
     }
