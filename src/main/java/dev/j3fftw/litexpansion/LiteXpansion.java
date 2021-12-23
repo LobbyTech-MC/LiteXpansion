@@ -9,14 +9,23 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.j3fftw.litexpansion.resources.ThoriumResource;
+import dev.j3fftw.litexpansion.service.MetricsService;
 import dev.j3fftw.litexpansion.ticker.PassiveElectricRemovalTicker;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.utils.Reflections;
 import dev.j3fftw.litexpansion.uumatter.UUMatter;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
-import io.github.thebusybiscuit.slimefun4.core.researching.Research;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.cscorelib2.updater.GitHubBuildsUpdater;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.researches.Research;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.GitHubBuildsUpdater;
+import org.bstats.MetricsBase;
+import org.bstats.bukkit.Metrics;
+import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import javax.annotation.Nonnull;
+import java.io.File;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
@@ -79,17 +88,17 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
     private void nerfCrap() {
         // Vanilla SF
-        final SlimefunItem energizedPanel = SlimefunItem.getByID("SOLAR_GENERATOR_3");
+        final SlimefunItem energizedPanel = SlimefunItem.getById("SOLAR_GENERATOR_4");
         if (energizedPanel != null) {
             Reflections.setField(energizedPanel, "dayEnergy", 64);
             Reflections.setField(energizedPanel, "nightEnergy", 32);
         }
 
         // InfinityExpansion - Halved all values and made infinite panel much less
-        Reflections.setField(SlimefunItem.getByID("ADVANCED_PANEL"), "generation", 75);
-        Reflections.setField(SlimefunItem.getByID("CELESTIAL_PANEL"), "generation", 250);
-        Reflections.setField(SlimefunItem.getByID("VOID_PANEL"), "generation", 1200);
-        Reflections.setField(SlimefunItem.getByID("INFINITE_PANEL"), "generation", 20_000);
+        Reflections.setField(SlimefunItem.getById("ADVANCED_PANEL"), "generation", 75);
+        Reflections.setField(SlimefunItem.getById("CELESTIAL_PANEL"), "generation", 250);
+        Reflections.setField(SlimefunItem.getById("VOID_PANEL"), "generation", 1200);
+        Reflections.setField(SlimefunItem.getById("INFINITE_PANEL"), "generation", 20_000);
     }
 
     private void setupResearches() {
@@ -198,11 +207,11 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         return "https://github.com/StarWishsama/LiteXpansion-CN/issues";
     }
 
-    private static void setInstance(LiteXpansion ins) {
-        instance = ins;
-    }
-
     public static LiteXpansion getInstance() {
         return instance;
+    }
+
+    private static void setInstance(LiteXpansion ins) {
+        instance = ins;
     }
 }

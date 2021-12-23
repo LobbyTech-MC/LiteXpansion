@@ -1,18 +1,19 @@
 package dev.j3fftw.litexpansion;
 
 import dev.j3fftw.extrautils.utils.LoreBuilderDynamic;
-import dev.j3fftw.litexpansion.machine.generators.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
+import dev.j3fftw.litexpansion.machine.generators.AdvancedSolarPanel;
 import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerHead;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerSkin;
 import io.github.thebusybiscuit.slimefun4.utils.LoreBuilder;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -21,11 +22,16 @@ import org.bukkit.enchantments.Enchantment;
 public final class Items {
 
     //region Category
-    public static final Category LITEXPANSION = new Category(
-        new NamespacedKey(LiteXpansion.getInstance(), "litexpansion"),
-        new CustomItem(SkullItem.fromHash("3f87fc5cbb233743a82fb0fa51fe739487f29bcc01c9026621ecefad197f4fb1"),
-            "&7UU物质机器")
+    public static final ItemGroup LITEXPANSION = new ItemGroup(
+        new NamespacedKey(LiteXpansion.getInstance(),
+            "litexpansion"
+        ),
+        new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode(
+            "3f87fc5cbb233743a82fb0fa51fe739487f29bcc01c9026621ecefad197f4fb1")),
+            "&7纳米科技"
+        )
     );
+
     public static final SlimefunItemStack ELECTRIC_CHESTPLATE = new SlimefunItemStack(
         "ELECTRIC_CHESTPLATE",
         Material.LEATHER_CHESTPLATE, Color.TEAL,
@@ -148,8 +154,10 @@ public final class Items {
 
     public static final SlimefunItemStack THORIUM = new SlimefunItemStack(
         "THORIUM",
-        new CustomItem(SkullItem.fromHash("b87403257c0eaa518cf186deccde137d476556ccff146d503fb2e73956582f37"),
-            "Thorium"),
+        new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode(
+            "b87403257c0eaa518cf186deccde137d476556ccff146d503fb2e73956582f37")),
+            "Thorium"
+        ),
         "&8钍",
         "",
         LoreBuilder.radioactive(Radioactivity.HIGH),
@@ -161,14 +169,14 @@ public final class Items {
         Material.DEAD_BUSH,
         "&8废料",
         "",
-        "&7用于合成 &5UU 物质"
+        "&7用于合成 &5纳米物质"
     );
     public static final SlimefunItemStack UU_MATTER = new SlimefunItemStack(
         "UU_MATTER",
         Material.PURPLE_DYE,
-        "&5UU 物质",
+        "&5纳米物质",
         "",
-        "&7用于合成各种物品"
+        "&7用于生产各种物品"
     );
     public static final SlimefunItemStack IRIDIUM = new SlimefunItemStack(
         "IRIDIUM",
@@ -180,7 +188,7 @@ public final class Items {
         Material.PAPER,
         "&f铱板",
         "",
-        "&7用于合成量子套"
+        "&7用于生产量子套"
     );
     public static final SlimefunItemStack THORIUM_DUST = new SlimefunItemStack(
         "THORIUM_DUST",
@@ -300,9 +308,9 @@ public final class Items {
     public static final SlimefunItemStack MASS_FABRICATOR_MACHINE = new SlimefunItemStack(
         "MASS_FABRICATOR_MACHINE",
         Material.PURPLE_CONCRETE,
-        "&5物质生成机",
+        "&5纳米物质工厂",
         "",
-        "&f将 &8废料 &f转换成 &5UU 物质",
+        "&f将 &8废料 &f转换成 &5纳米物质",
         "&7&o&m\"只需要亿点点电\"",
         "",
         LoreBuilderDynamic.powerBuffer(MassFabricator.CAPACITY),
@@ -311,7 +319,7 @@ public final class Items {
     public static final SlimefunItemStack RUBBER_SYNTHESIZER_MACHINE = new SlimefunItemStack(
         "RUBBER_SYNTHESIZER",
         Material.ORANGE_CONCRETE,
-        "&6橡胶合成机",
+        "&6橡胶厂",
         "",
         "&f将原油转化为 &7橡胶",
         "",
@@ -357,12 +365,12 @@ public final class Items {
     public static final SlimefunItemStack MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT = new SlimefunItemStack(
         "MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT",
         Material.IRON_BLOCK,
-        "&7MFE"
+        "&7多功能电力存储单元"
     );
     public static final SlimefunItemStack MULTI_FUNCTIONAL_STORAGE_UNIT = new SlimefunItemStack(
         "MULTI_FUNCTIONAL_STORAGE_UNIT",
         Material.DIAMOND_BLOCK,
-        "&7MFSU"
+        "&7多功能存储单元"
     );
     public static final SlimefunItemStack GOLD_PLATE = new SlimefunItemStack(
         "GOLD_PLATE",
@@ -453,12 +461,13 @@ public final class Items {
 
     public static final SlimefunItemStack FOOD_SYNTHESIZER = new SlimefunItemStack(
         "FOOD_SYNTHESIZER",
-        new CustomItem(SkullItem.fromHash("a967efe969d264f635f2c201c34381ef59c72e16ec50af7692033121e22fba9c"),
+        new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode(
+            "a967efe969d264f635f2c201c34381ef59c72e16ec50af7692033121e22fba9c")),
             "Food Synthesizer"),
-        "&dFood Synthesizer",
+        "&d食品加工厂",
         "",
-        "&fKeeps you fed with artificial food.",
-        "&fComes in the flavors!",
+        "&f生产生活必需品",
+        "&f解决温饱问题必备!",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 100 J"
     );
@@ -529,6 +538,12 @@ public final class Items {
         "ANCIENT_DEBRIS_DUST",
         Material.BROWN_DYE,
         "&7远古残骸粉"
+    );
+
+    public static final SlimefunItemStack UU_CRAFTER = new SlimefunItemStack(
+        "UU_CRAFTER",
+        Material.CRAFTING_TABLE,
+        "&7纳米物质合成机"
     );
 
     private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);

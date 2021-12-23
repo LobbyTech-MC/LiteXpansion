@@ -1,17 +1,18 @@
 package dev.j3fftw.litexpansion;
 
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import javax.annotation.Nonnull;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import org.apache.commons.lang.Validate;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 public class GlowEnchant extends Enchantment {
 
@@ -67,7 +68,7 @@ public class GlowEnchant extends Enchantment {
         if (item.hasItemMeta()) {
             final ItemMeta itemMeta = item.getItemMeta();
             Validate.notNull(itemMeta, "can not be null");
-            final Optional<String> id = SlimefunPlugin.getItemDataService().getItemData(itemMeta);
+            final Optional<String> id = Slimefun.getItemDataService().getItemData(itemMeta);
 
             if (id.isPresent()) {
                 return ids.contains(id.get());

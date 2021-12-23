@@ -3,22 +3,20 @@ package dev.j3fftw.litexpansion.machine.generators;
 import dev.j3fftw.extrautils.interfaces.InventoryBlock;
 import dev.j3fftw.extrautils.utils.Utils;
 import dev.j3fftw.litexpansion.Items;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.EnergyNetProvider;
 import io.github.thebusybiscuit.slimefun4.core.networks.energy.EnergyNetComponentType;
 import io.github.thebusybiscuit.slimefun4.implementation.SlimefunItems;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -26,12 +24,11 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, EnergyNetProvider {
 
-    private static final int PROGRESS_SLOT = 4;
-    private static final CustomItem generatingItem = new CustomItem(Material.ORANGE_STAINED_GLASS_PANE,
-        "&c不在发电..."
-    );
     public static final int ADVANCED_DAY_RATE = 80;
     public static final int ADVANCED_NIGHT_RATE = 10;
     public static final int ADVANCED_OUTPUT = 320;
@@ -44,13 +41,17 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
     public static final int ULTIMATE_NIGHT_RATE = 640;
     public static final int ULTIMATE_OUTPUT = 5120;
     public static final int ULTIMATE_STORAGE = 10_000_000;
+    private static final int PROGRESS_SLOT = 4;
+    private static final CustomItemStack generatingItem = new CustomItemStack(Material.ORANGE_STAINED_GLASS_PANE,
+        "&cNot Generating..."
+    );
     private final Type type;
 
     public AdvancedSolarPanel(Type type) {
         super(Items.LITEXPANSION, type.getItem(), RecipeType.ENHANCED_CRAFTING_TABLE, type.getRecipe());
         this.type = type;
 
-        createPreset(this, type.getItem().getImmutableMeta().getDisplayName().orElse("&7太阳能板"),
+        createPreset(this, type.getItem().getItemMetaSnapshot().getDisplayName().orElse("&7太阳能板"),
             blockMenuPreset -> {
                 for (int i = 0; i < 9; i++) {
                     blockMenuPreset.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
@@ -85,15 +86,15 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
 
         if (inv.toInventory() != null && !inv.toInventory().getViewers().isEmpty()) {
             inv.replaceExistingItem(PROGRESS_SLOT,
-                canGenerate ? new CustomItem(Material.GREEN_STAINED_GLASS_PANE, "&a正在发电",
+                canGenerate ? new CustomItemStack(Material.GREEN_STAINED_GLASS_PANE, "&a发电中",
                     "", "&b发电环境: " + generationType,
-                    "&7正以 &6" + Utils.powerFormatAndFadeDecimals(Utils.perTickToPerSecond(rate)) + " J/s " +
-                        "&8(" + rate + " J/t) 的速度运作中",
-                    "", "&7储存电能: &6" + Utils.powerFormatAndFadeDecimals((double) stored + rate) + " J"
+                    "&7当前发电量 &6" + Utils.powerFormatAndFadeDecimals(Utils.perTickToPerSecond(rate)) + " J/s " +
+                        "&8(" + rate + " J/t)",
+                    "", "&7储存的电力: &6" + Utils.powerFormatAndFadeDecimals((double) stored + rate) + " J"
                 )
-                    : new CustomItem(Material.ORANGE_STAINED_GLASS_PANE, "&c待机中",
-                    "", "&7发电机已达到电容量上限, 无法继续发电.",
-                    "", "&7储存电能: &6" + Utils.powerFormatAndFadeDecimals(stored) + " J")
+                    : new CustomItemStack(Material.ORANGE_STAINED_GLASS_PANE, "&c不在发电",
+                    "", "&7发电量已达上限.",
+                    "", "&7储存的电力: &6" + Utils.powerFormatAndFadeDecimals(stored) + " J")
             );
         }
 

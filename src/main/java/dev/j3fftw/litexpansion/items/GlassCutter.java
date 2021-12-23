@@ -2,16 +2,15 @@ package dev.j3fftw.litexpansion.items;
 
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.core.handlers.ItemUseHandler;
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.items.SimpleSlimefunItem;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
-import javax.annotation.Nonnull;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.cscorelib2.protection.ProtectableAction;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,6 +21,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
 
 /**
  * The {@link GlassCutter} is a {@link SimpleSlimefunItem} that breaks
@@ -58,8 +59,8 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
 
         if (e.getAction() == Action.LEFT_CLICK_BLOCK
             && SlimefunTag.GLASS.isTagged(blockType) && isItem(e.getItem())
-            && SlimefunPlugin.getProtectionManager().hasPermission(e.getPlayer(), blockLocation,
-            ProtectableAction.BREAK_BLOCK)
+            && Slimefun.getProtectionManager().hasPermission(e.getPlayer(), blockLocation,
+            Interaction.BREAK_BLOCK)
         ) {
             e.setCancelled(true);
 

@@ -2,7 +2,16 @@ package dev.j3fftw.litexpansion.uumatter;
 
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import io.github.thebusybiscuit.slimefun4.utils.NumberUtils;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,14 +21,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public final class UUMatter {
 
@@ -80,7 +81,7 @@ public final class UUMatter {
         if (mat != null) {
             output = new ItemStack(mat, amount);
         } else {
-            SlimefunItem item = SlimefunItem.getByID(id);
+            SlimefunItem item = SlimefunItem.getById(id);
             if (item == null) {
                 LiteXpansion.getInstance().getLogger().log(Level.WARNING,
                     "创建合成配方失败, 无效的物品名: {0}", new Object[] {id});

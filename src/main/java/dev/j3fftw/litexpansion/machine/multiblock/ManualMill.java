@@ -2,15 +2,15 @@ package dev.j3fftw.litexpansion.machine.multiblock;
 
 import dev.j3fftw.litexpansion.Items;
 import dev.j3fftw.litexpansion.LiteXpansion;
-import javax.annotation.Nonnull;
-
 import dev.j3fftw.litexpansion.machine.extensions.CraftingMultiBlock;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class ManualMill extends CraftingMultiBlock {
 
