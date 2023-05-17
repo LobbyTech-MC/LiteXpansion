@@ -101,7 +101,7 @@ public final class Items {
         "&7节点配置复制器",
         "",
         "&7> &e右键 &7- 复制节点配置",
-        "&7> &e左键  &7- 粘贴节点配置",
+        "&7> &e左键  &7- 应用节点配置",
         "&7> &eShift+右键 &7- 清除节点配置"
     );
     //endregion
@@ -544,6 +544,12 @@ public final class Items {
         "UU_CRAFTER",
         Material.CRAFTING_TABLE,
         "&7纳米物质合成机"
+    );
+
+    public static final SlimefunItemStack CONVERTER = new SlimefunItemStack(
+        "CONVER",
+        Material.COAL_BLOCK,
+        "&7Converter"
     );
 
     private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);

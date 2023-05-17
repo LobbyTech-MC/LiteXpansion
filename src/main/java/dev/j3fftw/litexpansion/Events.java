@@ -1,5 +1,6 @@
 package dev.j3fftw.litexpansion;
 
+import com.google.common.base.Preconditions;
 import dev.j3fftw.extrautils.objects.DyeItem;
 import dev.j3fftw.litexpansion.armor.ElectricChestplate;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
@@ -12,22 +13,26 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Rechargeable;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 import io.github.thebusybiscuit.slimefun4.utils.ChargeUtils;
+import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
-import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Cat;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -40,22 +45,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Events implements Listener {
 
     private final GlassCutter glassCutter = (GlassCutter) Items.GLASS_CUTTER.getItem();
     private final ElectricChestplate electricChestplate = (ElectricChestplate) Items.ELECTRIC_CHESTPLATE.getItem();
     private final FoodSynthesizer foodSynth = (FoodSynthesizer) Items.FOOD_SYNTHESIZER.getItem();
-
-    //TODO Come up with a better way for this.
-    private final Set<Material> drillableBlocks = new HashSet<>(Arrays.asList(Material.STONE,
-        Material.COBBLESTONE, Material.ANDESITE, Material.DIORITE, Material.GRANITE,
-        Material.NETHERRACK, Material.END_STONE)
-    );
 
     @EventHandler
     public void onItemDamage(PlayerItemDamageEvent e) {
@@ -77,9 +73,8 @@ public class Events implements Listener {
      */
     @EventHandler
     public void onPlayerDamage(EntityDamageEvent e) {
-        if (e.getEntity() instanceof Player && ((Player) e.getEntity()).getEquipment() != null) {
-            final Player p = (Player) e.getEntity();
-            final ItemStack chestplate = p.getEquipment().getChestplate();
+        if (e.getEntity() instanceof Player player && player.getEquipment() != null) {
+            final ItemStack chestplate = player.getEquipment().getChestplate();
             if (e.getFinalDamage() > 0
                 && chestplate != null
                 && electricChestplate.isItem(chestplate)
@@ -97,12 +92,11 @@ public class Events implements Listener {
                     .append(String.valueOf(electricChestplate.getItemCharge(chestplate))).color(ChatColor.YELLOW)
                     .append(" J");
 
-                if (meta instanceof Damageable) {
+                if (meta instanceof Damageable damageable) {
                     final double chargePercent = (newCharge / electricChestplate.getMaxItemCharge(chestplate)) * 100;
                     final int percentOfMax = (int) ((chargePercent / 100) * chestplate.getType().getMaxDurability());
                     final int damage = Math.max(1, chestplate.getType().getMaxDurability() - percentOfMax);
-                    ((Damageable) meta).setDamage(damage);
-
+                    damageable.setDamage(damage);
                     chestplate.setItemMeta(meta);
                 }
 
@@ -136,14 +130,13 @@ public class Events implements Listener {
     @EventHandler
     public void onHungerDamage(EntityDamageEvent e) {
         if (e.getCause() == EntityDamageEvent.DamageCause.STARVATION
-            && e.getEntity() instanceof Player
+            && e.getEntity() instanceof Player player
             && Items.FOOD_SYNTHESIZER != null
             && !Items.FOOD_SYNTHESIZER.getItem().isDisabled()
         ) {
-            checkAndConsume((Player) e.getEntity(), null);
+            checkAndConsume(player, null);
         }
     }
-
 
     /**
      * Prevents animals from being dyed if the item used
@@ -166,105 +159,87 @@ public class Events implements Listener {
     }
 
     @EventHandler
-    public void onMiningDrillUse(PlayerInteractEvent e) {
-        final Block block = e.getClickedBlock();
+    public void onDrillUse(PlayerInteractEvent event) {
+        final Block block = event.getClickedBlock();
         if (block == null) {
             return;
         }
 
         final Material blockType = block.getType();
         final Location blockLocation = block.getLocation();
+        final ItemStack hand = event.getItem();
 
         final MiningDrill miningDrill = (MiningDrill) SlimefunItem.getById(Items.MINING_DRILL.getItemId());
+        if (miningDrill.isItem(hand)) {
 
-        Validate.notNull(miningDrill, "Can no be null");
-        if (miningDrill.isItem(e.getItem()) && drillableBlocks.contains(blockType)
-            && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
-            blockLocation, Interaction.BREAK_BLOCK)
-        ) {
-            e.setCancelled(true);
-
-            final SlimefunItem slimefunItem = BlockStorage.check(block);
-
-            if (slimefunItem == null && ((Rechargeable) Objects.requireNonNull(SlimefunItem.getByItem(e.getItem())))
-                .removeItemCharge(e.getItem(), 0.5F)) {
-                // This allows other plugins to register broken block as player broken
-                BlockBreakEvent newEvent = new BlockBreakEvent(block, e.getPlayer());
-                Bukkit.getServer().getPluginManager().callEvent(newEvent);
-                block.setType(Material.AIR);
-                e.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
-
-                // This has to be done because the item in the main hand is not a pickaxe
-                if (blockType == Material.STONE) {
-                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
-                        new ItemStack(Material.COBBLESTONE)
-                    );
-
-                } else {
-                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
-                        new ItemStack(blockType)
-                    );
-                }
+            if (!check(miningDrill, event, blockLocation)) {
+                return;
             }
+
+            if (!SlimefunTag.STONE_VARIANTS.isTagged(blockType)) {
+                return;
+            }
+
+            drillUse(0.5f, block, blockType, blockLocation, event);
+        }
+
+        final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getById(Items.DIAMOND_DRILL.getItemId());
+        if (diamondDrill != null && diamondDrill.isItem(hand)) {
+
+            if (!check(diamondDrill, event, blockLocation)) {
+                return;
+            }
+
+            if (!SlimefunTag.MINEABLE_PICKAXE.isTagged(blockType)) {
+                return;
+            }
+
+            drillUse(1.5f, block, blockType, blockLocation, event);
         }
     }
 
-    //TODO combine onDiamondDrillUse with onMiningDrillUse
-    @EventHandler
-    public void onDiamondDrillUse(PlayerInteractEvent e) {
-        final Block block = e.getClickedBlock();
-        if (block == null) {
+
+    public boolean check(MiningDrill miningDrill, PlayerInteractEvent event, Location blockLocation) {
+        return miningDrill.isItem(event.getItem())
+            && !miningDrill.isDisabled()
+            && Slimefun.getProtectionManager().hasPermission(event.getPlayer(),
+            blockLocation, Interaction.BREAK_BLOCK);
+    }
+
+    public void drillUse(float charge, Block block, Material blockType,
+                         Location blockLocation, PlayerInteractEvent event
+    ) {
+        event.setCancelled(true);
+
+        final SlimefunItem slimefunItem = BlockStorage.check(block);
+
+        if (slimefunItem != null) {
             return;
         }
 
-        final Material blockType = block.getType();
-        final Location blockLocation = block.getLocation();
+        final Rechargeable item = (Rechargeable) SlimefunItem.getByItem(event.getItem());
 
-        final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getById(Items.DIAMOND_DRILL.getItemId());
-
-
-        Validate.notNull(diamondDrill, "Can not be null");
-        if ((diamondDrill.isItem(e.getItem())
-            && (drillableBlocks.contains(blockType)
-            || blockType == Material.OBSIDIAN
-            || blockType.toString().endsWith("_ORE")))
-            && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
-            blockLocation, Interaction.BREAK_BLOCK)
-        ) {
-            e.setCancelled(true);
-
-            final SlimefunItem slimefunItem = BlockStorage.check(block);
-
-            if (slimefunItem == null && ((Rechargeable) Objects.requireNonNull(SlimefunItem.getByItem(e.getItem())))
-                .removeItemCharge(e.getItem(), 1.5F)
-            ) {
-                // This allows other plugins to register broken block as player broken
-                BlockBreakEvent newEvent = new BlockBreakEvent(block, e.getPlayer());
-                Bukkit.getServer().getPluginManager().callEvent(newEvent);
-                block.setType(Material.AIR);
-                e.getPlayer().playSound(blockLocation, Sound.BLOCK_STONE_BREAK, 1.5F, 1F);
-
-                // This has to be done because the item in the main hand is not a pickaxe
-                if (blockType == Material.STONE) {
-                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
-                        new ItemStack(Material.COBBLESTONE)
-                    );
-
-                } else {
-                    Objects.requireNonNull(blockLocation.getWorld()).dropItem(blockLocation,
-                        new ItemStack(blockType)
-                    );
-                }
-            }
+        if (item == null) {
+            return;
         }
+
+        if (!item.removeItemCharge(event.getItem(), charge)) {
+            return;
+        }
+
+        BlockBreakEvent newEvent = new BlockBreakEvent(block, event.getPlayer());
+        Bukkit.getServer().getPluginManager().callEvent(newEvent);
+
+        block.breakNaturally();
     }
+
 
     @EventHandler
     public void onDiamondDrillUpgrade(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         // 1.16 inventory, compare strings
         final MiningDrill diamondDrill = (MiningDrill) SlimefunItem.getById(Items.DIAMOND_DRILL.getItemId());
-        Validate.notNull(diamondDrill, "Can not be null");
+        Preconditions.checkNotNull(diamondDrill, "Can not be null");
         if (diamondDrill.isItem(e.getCurrentItem())
             && p.getOpenInventory().getType().toString().equals("SMITHING")
         ) {
@@ -285,12 +260,10 @@ public class Events implements Listener {
         final Location blockLocation = block.getLocation();
         final ItemStack item = e.getItem();
 
-        Validate.notNull(glassCutter, "Can not be null");
-        if ((blockType == Material.GLASS
-            || blockType == Material.GLASS_PANE
-            || blockType.name().endsWith("_GLASS")
-            || blockType.name().endsWith("_GLASS_PANE")
-        ) && glassCutter.isItem(item)
+        Preconditions.checkNotNull(glassCutter, "Can not be null");
+        if (SlimefunTag.GLASS.isTagged(blockType)
+            && glassCutter.isItem(item)
+            && !glassCutter.isDisabled()
             && Slimefun.getProtectionManager().hasPermission(e.getPlayer(),
             blockLocation, Interaction.BREAK_BLOCK)
         ) {
@@ -298,10 +271,9 @@ public class Events implements Listener {
 
             final SlimefunItem slimefunItem = BlockStorage.check(block);
 
-            if (slimefunItem == null && ((Rechargeable) Objects.requireNonNull(SlimefunItem.getByItem(item)))
-                .removeItemCharge(item, 0.5F)
+            if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(item)).removeItemCharge(item, 0.5F)
             ) {
-                Objects.requireNonNull(blockLocation.getWorld()).dropItemNaturally(blockLocation,
+                blockLocation.getWorld().dropItemNaturally(blockLocation,
                     new ItemStack(blockType)
                 );
                 block.setType(Material.AIR);
@@ -323,7 +295,7 @@ public class Events implements Listener {
      */
     public void checkAndConsume(@Nonnull Player p, @Nullable FoodLevelChangeEvent e) {
         for (ItemStack item : p.getInventory().getContents()) {
-            Validate.notNull(foodSynth, "Can not be null");
+            Preconditions.checkNotNull(foodSynth, "Can not be null");
             if (foodSynth.isItem(item) && foodSynth.removeItemCharge(item, 5F)) {
                 p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EAT, 1.5F, 1F);
                 p.setFoodLevel(20);
@@ -335,4 +307,25 @@ public class Events implements Listener {
             }
         }
     }
+
+    /**
+     * Rest In Peace Kleintje aka Chunker 9/16/2022
+     * You will be missed
+     * <p>
+     * This event is dedicated to my cat Kleintje also
+     * known as Chunker
+     */
+    @EventHandler
+    public void onCatSpawn(EntitySpawnEvent event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof Cat cat) {
+            int randomNumber = ThreadLocalRandom.current().nextInt(0, 100_000);
+            if (cat.getCatType() == Cat.Type.RED && randomNumber == 91622) {
+                OfflinePlayer player = Bukkit.getOfflinePlayer("22815ad5-2a54-44c0-8f83-f65cfe5310f8"); // _lagpc_
+                entity.setCustomName("Kleintje");
+                ((Cat) entity).setOwner(player);
+            }
+        }
+    }
 }
+

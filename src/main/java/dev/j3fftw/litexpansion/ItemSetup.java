@@ -9,6 +9,7 @@ import dev.j3fftw.litexpansion.items.GlassCutter;
 import dev.j3fftw.litexpansion.items.MagThor;
 import dev.j3fftw.litexpansion.items.MiningDrill;
 import dev.j3fftw.litexpansion.items.Thorium;
+import dev.j3fftw.litexpansion.machine.Converter;
 import dev.j3fftw.litexpansion.machine.Macerator;
 import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.MultiFunctionalElectricStorageUnit;
@@ -83,6 +84,7 @@ final class ItemSetup {
         new ManualMill().register(plugin);
         new Macerator().register(plugin);
         new UUCrafter().register(plugin);
+        new Converter().register(plugin);
     }
 
     //Disable when SlimyTreeTaps exists
@@ -222,13 +224,9 @@ final class ItemSetup {
         RecipeType.SMELTERY.register(new ItemStack[] {Items.QUARTZ_DUST},
             new ItemStack(Material.QUARTZ)
         );
-
-        // 1.16
-        if (Slimefun.getMinecraftVersion().isAtLeast(MinecraftVersion.MINECRAFT_1_16)) {
-            RecipeType.SMELTERY.register(new ItemStack[] {Items.ANCIENT_DEBRIS_DUST},
-                new ItemStack(Material.NETHERITE_INGOT)
-            );
-        }
+        RecipeType.SMELTERY.register(new ItemStack[] {Items.ANCIENT_DEBRIS_DUST},
+            new ItemStack(Material.NETHERITE_INGOT)
+        );
 
         // Resources
         new MagThor().register(plugin);

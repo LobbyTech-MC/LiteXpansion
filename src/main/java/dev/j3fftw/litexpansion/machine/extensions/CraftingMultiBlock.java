@@ -11,8 +11,11 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.items.ItemUtils;
 import io.github.thebusybiscuit.slimefun4.libraries.paperlib.PaperLib;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -22,7 +25,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 public abstract class CraftingMultiBlock extends MultiBlockMachine {
@@ -44,15 +46,18 @@ public abstract class CraftingMultiBlock extends MultiBlockMachine {
         return fakeInv;
     }
 
-    public void onSuccessfulCraft(@Nonnull Block b) {}
-
     @Override
     public void onInteract(Player p, Block b) {
         Block dispenser = b.getRelative(BlockFace.DOWN);
         BlockState state = PaperLib.getBlockState(dispenser, false).getState();
 
-        if (state instanceof Dispenser) {
-            Dispenser disp = (Dispenser) state;
+        final Block specialBlock = getSpecialBlock(dispenser);
+        if (specialBlock != null && !specialBlock.getType().isAir() && BlockStorage.hasBlockInfo(specialBlock)) {
+            p.sendMessage(ChatColor.RED + "You can't use Slimefun blocks as part of the multi-block >:(");
+            return;
+        }
+
+        if (state instanceof Dispenser disp) {
             Inventory inv = disp.getInventory();
             List<ItemStack[]> inputs = RecipeType.getRecipeInputList(this);
 
@@ -89,7 +94,14 @@ public abstract class CraftingMultiBlock extends MultiBlockMachine {
 
             outputInv.addItem(output);
 
-            onSuccessfulCraft(b);
+            if (removeSpecialBlock()) {
+                final Block specialBlock = getSpecialBlock(dispenser);
+                if (specialBlock != null) {
+                    specialBlock.setType(Material.AIR);
+                    specialBlock.getWorld().spawnParticle(Particle.PORTAL, specialBlock.getLocation(), 4, 0.5, 0.5,
+                        0.5);
+                }
+            }
         } else {
             Slimefun.getLocalization().sendMessage(p, "machines.full-inventory", true);
         }
@@ -110,4 +122,14 @@ public abstract class CraftingMultiBlock extends MultiBlockMachine {
 
         return true;
     }
+
+    /**
+     * Gets the special block which we wish to remove or handle.
+     *
+     * @param dispenser The dispenser used to get the special block
+     * @return The special block
+     */
+    public abstract Block getSpecialBlock(Block dispenser);
+
+    public abstract boolean removeSpecialBlock();
 }
