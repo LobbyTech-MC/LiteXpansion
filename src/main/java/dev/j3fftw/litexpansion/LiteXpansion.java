@@ -1,6 +1,7 @@
 package dev.j3fftw.litexpansion;
 
 import java.io.File;
+import java.util.logging.Level;
 
 import javax.annotation.Nonnull;
 
@@ -17,6 +18,7 @@ import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.GitHubBuildsUpdater;
+import net.guizhanss.guizhanlibplugin.updater.GuizhanBuildsUpdaterWrapper;
 
 public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
 
