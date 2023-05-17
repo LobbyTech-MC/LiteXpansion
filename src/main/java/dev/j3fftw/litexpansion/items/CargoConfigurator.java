@@ -122,8 +122,7 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
     ) {
         PersistentDataAPI.remove(meta, CARGO_BLOCK);
         PersistentDataAPI.remove(meta, CARGO_CONFIG);
-        player.sendMessage(ChatColor.RED + "已清除货运节点的配置!");
-
+        player.sendMessage(ChatColor.RED + "已清除该货运节点的配置!");
         if (lore.size() != defaultLore.size()) {
             lore.clear();
             lore.addAll(defaultLore);
@@ -151,7 +150,7 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
 
             BlockStorage.setBlockInfo(e.getClickedBlock(), config, true);
             BlockStorage.getStorage(e.getClickedBlock().getWorld()).reloadInventory(e.getClickedBlock().getLocation());
-            e.getPlayer().sendMessage(ChatColor.GREEN + "已应用配置!");
+            e.getPlayer().sendMessage(ChatColor.GREEN + "已黏贴配置!");
         } else if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             PersistentDataAPI.setString(meta, CARGO_BLOCK, blockId);
             PersistentDataAPI.setString(meta, CARGO_CONFIG, BlockStorage.getBlockInfoAsJson(e.getClickedBlock()));
@@ -163,7 +162,7 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
             }
             lore.addAll(Arrays.asList("", ChatColor.GRAY + "> 物品 "
                 + ChatColor.RESET + clickedItemStack.getItemMeta().getDisplayName()
-                + ChatColor.GRAY + " 的配置!"
+                + ChatColor.GRAY + " 的配置"
             ));
             e.getPlayer().sendMessage(ChatColor.GREEN + "成功复制节点配置!");
         }

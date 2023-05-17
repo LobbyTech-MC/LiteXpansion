@@ -128,7 +128,7 @@ public class UUCrafter extends SlimefunItem implements InventoryBlock, EnergyNet
     }
 
     public void setup() {
-        new BlockMenuPresetTest(this.getId(), "&8UU合成机", this);
+        new BlockMenuPresetTest(this.getId(), "&8纳米物质合成机", this);
     }
 
     public void onNewInstance(BlockMenu menu, Block block) {

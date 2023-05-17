@@ -6,7 +6,7 @@
 
     <groupId>dev.j3fftw</groupId>
     <artifactId>LiteXpansion</artifactId>
-    <version>UNOFFICIAL</version>
+    <version>1.0.0</version>
 
     <repositories>
         <repository>

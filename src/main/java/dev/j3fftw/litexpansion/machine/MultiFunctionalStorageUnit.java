@@ -18,6 +18,6 @@ public class MultiFunctionalStorageUnit extends ChargingStorageUnit {
 
     @Override
     public String getTitle() {
-        return "&6多功能储存单元(MFSU)";
+        return "&6多功能存储单元";
     }
 }
