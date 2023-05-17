@@ -101,7 +101,7 @@ public final class Items {
         "&7节点配置复制器",
         "",
         "&7> &e右键 &7- 复制节点配置",
-        "&7> &e左键  &7- 应用节点配置",
+        "&7> &e左键  &7- 粘贴节点配置",
         "&7> &eShift+右键 &7- 清除节点配置"
     );
     //endregion
@@ -156,12 +156,12 @@ public final class Items {
         "THORIUM",
         new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode(
             "b87403257c0eaa518cf186deccde137d476556ccff146d503fb2e73956582f37")),
-            "Thorium"
+            "钍"
         ),
         "&8钍",
         "",
         LoreBuilder.radioactive(Radioactivity.HIGH),
-        LoreBuilder.HAZMAT_SUIT_REQUIRED
+        "&8\u21E8 &4需要防化服!"
     );
 
     public static final SlimefunItemStack SCRAP = new SlimefunItemStack(
@@ -329,7 +329,10 @@ public final class Items {
     public static final SlimefunItemStack MACERATOR = new SlimefunItemStack(
         "MACERATOR",
         Material.IRON_BLOCK,
-        "&7粉碎机"
+        "&7粉碎机",
+        "",
+        "&7可以粉碎很多东西",
+        ""
     );
     //// Solar panels
     public static final SlimefunItemStack ADVANCED_SOLAR_PANEL = new SlimefunItemStack(
@@ -463,7 +466,7 @@ public final class Items {
         "FOOD_SYNTHESIZER",
         new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode(
             "a967efe969d264f635f2c201c34381ef59c72e16ec50af7692033121e22fba9c")),
-            "Food Synthesizer"),
+            "食品加工厂"),
         "&d食品加工厂",
         "",
         "&f生产生活必需品",
@@ -549,7 +552,7 @@ public final class Items {
     public static final SlimefunItemStack CONVERTER = new SlimefunItemStack(
         "CONVER",
         Material.COAL_BLOCK,
-        "&7Converter"
+        "&7转换机"
     );
 
     private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);

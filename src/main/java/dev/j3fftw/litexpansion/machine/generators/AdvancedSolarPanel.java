@@ -75,7 +75,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
         String generationType = "&4未知";
 
         if (l.getWorld().getEnvironment() == World.Environment.NETHER) {
-            generationType = "&c地狱 &e(日间)";
+            generationType = "&c下界 &e(日间)";
         } else if (l.getWorld().getEnvironment() == World.Environment.THE_END) {
             generationType = "&5末地 &8(夜间)";
         } else if (rate == this.type.getDayGenerationRate()) {

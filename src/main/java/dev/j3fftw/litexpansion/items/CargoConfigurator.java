@@ -123,7 +123,6 @@ public class CargoConfigurator extends SimpleSlimefunItem<ItemUseHandler> implem
         PersistentDataAPI.remove(meta, CARGO_BLOCK);
         PersistentDataAPI.remove(meta, CARGO_CONFIG);
         player.sendMessage(ChatColor.RED + "已清除该货运节点的配置!");
-
         if (lore.size() != defaultLore.size()) {
             lore.clear();
             lore.addAll(defaultLore);

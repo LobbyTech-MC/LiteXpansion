@@ -32,8 +32,8 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         }
 
 
-        if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("DEV - ")) {
-            new GitHubBuildsUpdater(this, getFile(), "J3fftw1/LiteXpansion/master").start();
+        if (getConfig().getBoolean("options.auto-update") && getDescription().getVersion().startsWith("Build")) {
+            GuizhanBuildsUpdaterWrapper.start(this, getFile(), "ybw0014", "LiteXpansion", "master", false);
         }
 
         registerEnchantments();
@@ -78,6 +78,12 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
     }
 
     private void nerfCrap() {
+        getLogger().log(Level.WARNING, "###########################################");
+        getLogger().log(Level.WARNING, " LiteXpansion 已开启削弱其他附属的发电机效率 ");
+        getLogger().log(Level.WARNING, " 你可以在 LiteXpansion 附属的配置文件中关闭削弱 ");
+        getLogger().log(Level.WARNING, " 设置 options.nerf-other-addons 为 false ");
+        getLogger().log(Level.WARNING, "###########################################");
+
         // Vanilla SF
         final SlimefunItem energizedPanel = SlimefunItem.getById("SOLAR_GENERATOR_4");
         if (energizedPanel != null) {
@@ -99,13 +105,13 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         Reflections.setField(SlimefunItem.getById("FUSION_REACTOR"), "energyProducedPerTick", 8_192);
 
         // SupremeExpansion - just no...
-        Reflections.setField(SlimefunItem.getById("SUPREME_GENERATOR"), "energyProducedPerTick", 20_000);
-        Reflections.setField(SlimefunItem.getById("THORNIUM_GENERATOR"), "energyProducedPerTick", 10_000);
-        Reflections.setField(SlimefunItem.getById("LUMIUM_GENERATOR"), "energyProducedPerTick", 5_000);
-        Reflections.setField(SlimefunItem.getById("LUX_GENERATOR"), "energyProducedPerTick", 2_500);
-        Reflections.setField(SlimefunItem.getById("AQUA_GENERATOR"), "energyProducedPerTick", 2_500);
-        Reflections.setField(SlimefunItem.getById("VENUS_GENERATOR"), "energyProducedPerTick", 2_500);
-        Reflections.setField(SlimefunItem.getById("IGNIS_GENERATOR"), "energyProducedPerTick", 2_500);
+        Reflections.setField(SlimefunItem.getById("SUPREME_GENERATOR"), "energy", 20_000);
+        Reflections.setField(SlimefunItem.getById("THORNIUM_GENERATOR"), "energy", 10_000);
+        Reflections.setField(SlimefunItem.getById("LUMIUM_GENERATOR"), "energy", 5_000);
+        Reflections.setField(SlimefunItem.getById("LUX_GENERATOR"), "energy", 2_500);
+        Reflections.setField(SlimefunItem.getById("AQUA_GENERATOR"), "energy", 2_500);
+        Reflections.setField(SlimefunItem.getById("VENUS_GENERATOR"), "energy", 2_500);
+        Reflections.setField(SlimefunItem.getById("IGNIS_GENERATOR"), "energy", 2_500);
     }
 
     private void setupResearches() {
@@ -185,7 +191,8 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         new Research(new NamespacedKey(this, "what_are_these_cables"),
             696983, "这些线是用来干嘛的", 25)
             .addItems(Items.UNINSULATED_COPPER_CABLE, Items.COPPER_CABLE,
-                Items.UNINSULATED_COPPER_CABLE, Items.TIN_CABLE)
+                    Items.UNINSULATED_TIN_CABLE, Items.TIN_CABLE,
+                    Items.UNINSULATED_GOLD_CABLE, Items.GOLD_CABLE)
             .register();
 
         new Research(new NamespacedKey(this, "triple_a"),
