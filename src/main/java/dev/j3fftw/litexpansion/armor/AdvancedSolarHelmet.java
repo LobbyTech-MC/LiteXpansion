@@ -32,7 +32,6 @@ public class AdvancedSolarHelmet extends SolarHelmet {
     }
 
     @Getter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public enum Type {
 
         ADVANCED(Items.ADVANCED_SOLAR_HELMET, 5, new ItemStack[] {

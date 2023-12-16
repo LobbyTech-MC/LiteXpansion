@@ -39,7 +39,6 @@ public class MiningDrill extends SimpleSlimefunItem<ItemUseHandler> implements L
     }
 
     @Getter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public enum Type {
 
         MINING(Items.MINING_DRILL, new ItemStack[] {

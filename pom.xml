@@ -69,7 +69,7 @@
 
     <build>
         <defaultGoal>clean package</defaultGoal>
-        <finalName>${project.artifactId}-${project.version}</finalName>
+        <finalName>[粘液科技]${project.artifactId}-${project.version}</finalName>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 
         <resources>

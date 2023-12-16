@@ -146,7 +146,6 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
     }
 
     @Getter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public enum Type {
 
         ADVANCED(Items.ADVANCED_SOLAR_PANEL, ADVANCED_DAY_RATE, ADVANCED_NIGHT_RATE, ADVANCED_OUTPUT,
