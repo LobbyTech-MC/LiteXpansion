@@ -4,15 +4,9 @@ LiteXpansion 是一个 Slimefun4 的附属插件，继承了来自 SlimeXpansion
 
 ## :floppy_disk: 下载
 
-点击这里下载 LiteXpansion: [下载 LiteXpansion](https://builds.guizhanss.net/ybw0014/LiteXpansion-CN/master)
-
 <p align="center">
-  <a href="https://github.com/ybw0014/LiteXpansion-CN/actions/workflows/maven.yml">
-    <img src="https://github.com/ybw0014/LiteXpansion-CN/actions/workflows/maven.yml/badge.svg" alt="Java CI"/>
-  </a>
-
-  <a href="https://builds.guizhanss.net/ybw0014/LiteXpansion-CN/master">
-    <img src="https://builds.guizhanss.net/f/ybw0014/LiteXpansion-CN/master/badge.svg" alt="Build status"/>
+  <a href="https://builds.guizhanss.com/SlimefunGuguProject/LiteXpansion/master">
+    <img src="https://builds.guizhanss.com/f/SlimefunGuguProject/LiteXpansion/master/badge.svg" alt="Build status"/>
   </a>
 </p>
 
@@ -28,7 +22,7 @@ LiteXpansion 是一个 Slimefun4 的附属插件，继承了来自 SlimeXpansion
   - 无尽科技 - 所有发电机
   - 战争工艺 - 元素发电机
   - 星际 - 聚变反应堆
-  - 至尊研究院 - 所有发电机
+  - 至尊研究院2.0 - 所有发电机
 
 ### uumatter.yml
 

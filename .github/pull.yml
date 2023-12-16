@@ -3,3 +3,7 @@ rules:
   - base: master
     upstream: Slimefun-Addon-Community:master
     mergeMethod: merge
+    assignees:
+      - ybw0014
+    conflictReviewers:
+      - ybw0014

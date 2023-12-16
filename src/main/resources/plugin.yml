@@ -3,6 +3,6 @@ description: Description
 version: ${project.version}
 api-version: 1.16
 author: j3fftw
-depend: [Slimefun, GuizhanLibPlugin]
-softdepend: [SlimyTreeTaps]
+depend: [Slimefun]
+softdepend: [GuizhanLibPlugin, SlimyTreeTaps]
 main: dev.j3fftw.litexpansion.LiteXpansion

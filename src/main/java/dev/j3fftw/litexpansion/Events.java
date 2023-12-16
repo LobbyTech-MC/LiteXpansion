@@ -1,6 +1,7 @@
 package dev.j3fftw.litexpansion;
 
 import com.google.common.base.Preconditions;
+import com.xzavier0722.mc.plugin.slimefun4.storage.util.StorageCacheUtils;
 import dev.j3fftw.extrautils.objects.DyeItem;
 import dev.j3fftw.litexpansion.armor.ElectricChestplate;
 import dev.j3fftw.litexpansion.items.FoodSynthesizer;
@@ -14,7 +15,6 @@ import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.protection.Interaction;
 import io.github.thebusybiscuit.slimefun4.utils.ChargeUtils;
 import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -211,7 +211,7 @@ public class Events implements Listener {
     ) {
         event.setCancelled(true);
 
-        final SlimefunItem slimefunItem = BlockStorage.check(block);
+        final SlimefunItem slimefunItem = StorageCacheUtils.getSfItem(block.getLocation());
 
         if (slimefunItem != null) {
             return;
@@ -269,7 +269,7 @@ public class Events implements Listener {
         ) {
             e.setCancelled(true);
 
-            final SlimefunItem slimefunItem = BlockStorage.check(block);
+            final SlimefunItem slimefunItem = StorageCacheUtils.getSfItem(block.getLocation());
 
             if (slimefunItem == null && ((Rechargeable) SlimefunItem.getByItem(item)).removeItemCharge(item, 0.5F)
             ) {
