@@ -95,22 +95,22 @@ public class LiteXpansion extends JavaPlugin implements SlimefunAddon {
         // Vanilla SF
         final SlimefunItem energizedPanel = SlimefunItem.getById("SOLAR_GENERATOR_4");
         if (energizedPanel != null) {
-            Reflections.setField(energizedPanel, "dayEnergy", 64);
-            Reflections.setField(energizedPanel, "nightEnergy", 32);
+            Reflections.setField(energizedPanel, "dayEnergy", 128);
+            Reflections.setField(energizedPanel, "nightEnergy", 64);
         }
 
         // InfinityExpansion - Halved all values and made infinite panel + infinity reactor much less
-        Reflections.setField(SlimefunItem.getById("ADVANCED_PANEL"), "generation", 75);
-        Reflections.setField(SlimefunItem.getById("CELESTIAL_PANEL"), "generation", 250);
-        Reflections.setField(SlimefunItem.getById("VOID_PANEL"), "generation", 1200);
-        Reflections.setField(SlimefunItem.getById("INFINITE_PANEL"), "generation", 20_000);
-        Reflections.setField(SlimefunItem.getById("INFINITY_REACTOR"), "gen", 50_000);
+        Reflections.setField(SlimefunItem.getById("ADVANCED_PANEL"), "generation", 120);
+        Reflections.setField(SlimefunItem.getById("CELESTIAL_PANEL"), "generation", 560);
+        Reflections.setField(SlimefunItem.getById("VOID_PANEL"), "generation", 2_250);
+        Reflections.setField(SlimefunItem.getById("INFINITE_PANEL"), "generation", 45_000);
+        Reflections.setField(SlimefunItem.getById("INFINITY_REACTOR"), "gen", 90_000);
 
         // SlimefunWarfare - Halved all values
         Reflections.setField(SlimefunItem.getById("ELEMENTAL_REACTOR"), "energyProducedPerTick", 8_192);
 
         // Galactifun
-        Reflections.setField(SlimefunItem.getById("FUSION_REACTOR"), "energyProducedPerTick", 8_192);
+        Reflections.setField(SlimefunItem.getById("FUSION_REACTOR"), "energyProducedPerTick", 16_384);
 
         // SupremeExpansion - just no...
         Reflections.setField(SlimefunItem.getById("SUPREME_SUPREME_GENERATOR"), "energy", 20_000);
