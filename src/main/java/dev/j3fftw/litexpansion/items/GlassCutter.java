@@ -48,6 +48,7 @@ public class GlassCutter extends SimpleSlimefunItem<ItemUseHandler> implements L
     }
 
     @EventHandler
+    @SuppressWarnings("ConstantConditions")
     public void onGlassCut(PlayerInteractEvent e) {
         final Block block = e.getClickedBlock();
         if (block == null) {

@@ -23,15 +23,16 @@ public class AdvancedSolarHelmet extends SolarHelmet {
             type.getGenerationRate()
         );
         this.type = type;
-        Items.ADVANCED_SOLAR_HELMET.addEnchantment(Enchantment.UNBREAKING, 1);
-        Items.CARBONADO_SOLAR_HELMET.addEnchantment(Enchantment.UNBREAKING, 2);
-        Items.ENERGIZED_SOLAR_HELMET.addEnchantment(Enchantment.UNBREAKING, 3);
-        Items.ADVANCEDLX_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.UNBREAKING, 4);
-        Items.HYBRID_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.UNBREAKING, 5);
-        Items.ULTIMATE_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.UNBREAKING, 6);
+        Items.ADVANCED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 1);
+        Items.CARBONADO_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 2);
+        Items.ENERGIZED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 3);
+        Items.ADVANCEDLX_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
+        Items.HYBRID_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
+        Items.ULTIMATE_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 6);
     }
 
     @Getter
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public enum Type {
 
         ADVANCED(Items.ADVANCED_SOLAR_HELMET, 5, new ItemStack[] {
@@ -69,28 +70,10 @@ public class AdvancedSolarHelmet extends SolarHelmet {
 
         @Nonnull
         private final SlimefunItemStack item;
-        private final int GenerationRate;
+        private final int generationRate;
 
         @Nonnull
         private final ItemStack[] recipe;
-
-		Type(SlimefunItemStack item, int generationRate, ItemStack[] itemStacks) {
-			this.item = item;
-			this.GenerationRate = generationRate;
-			this.recipe = itemStacks;
-		}
-
-		SlimefunItemStack getItem() {
-			return this.item;
-		}
-
-		ItemStack[] getRecipe() {
-			return this.recipe;
-		}
-
-		int getGenerationRate() {
-			return this.GenerationRate;
-		}
     }
 }
 

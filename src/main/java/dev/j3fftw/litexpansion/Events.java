@@ -245,7 +245,7 @@ public class Events implements Listener {
         ) {
 
             e.setCancelled(true);
-            Utils.send(p, "&c你不能升级你的钻石钻头!");
+            Utils.send(p, "&c你不能升级钻石采矿钻头!");
         }
     }
 

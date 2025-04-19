@@ -16,7 +16,7 @@ public class MetalForge extends CraftingMultiBlock {
         new NamespacedKey(LiteXpansion.getInstance(), "metal_forge"),
         Items.METAL_FORGE,
         "",
-        "&7用于铸造金属"
+        "&7用于冶炼工业金属"
     );
 
     private static final ItemStack anvil = new ItemStack(Material.ANVIL);

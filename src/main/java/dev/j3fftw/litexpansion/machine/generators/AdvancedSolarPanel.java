@@ -43,7 +43,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
     public static final int ULTIMATE_STORAGE = 10_000_000;
     private static final int PROGRESS_SLOT = 4;
     private static final CustomItemStack generatingItem = new CustomItemStack(Material.ORANGE_STAINED_GLASS_PANE,
-        "&c不在发电..."
+        "&c未发电..."
     );
     private final Type type;
 
@@ -86,15 +86,15 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
 
         if (inv.toInventory() != null && !inv.toInventory().getViewers().isEmpty()) {
             inv.replaceExistingItem(PROGRESS_SLOT,
-                canGenerate ? new CustomItemStack(Material.GREEN_STAINED_GLASS_PANE, "&a发电中",
+                canGenerate ? new CustomItemStack(Material.GREEN_STAINED_GLASS_PANE, "&a正在发电",
                     "", "&b发电环境: " + generationType,
-                    "&7当前发电量 &6" + Utils.powerFormatAndFadeDecimals(Utils.perTickToPerSecond(rate)) + " J/s " +
-                        "&8(" + rate + " J/t)",
-                    "", "&7储存的电力: &6" + Utils.powerFormatAndFadeDecimals((double) stored + rate) + " J"
+                    "&7正以 &6" + Utils.powerFormatAndFadeDecimals(Utils.perTickToPerSecond(rate)) + " J/s " +
+                        "&8(" + rate + " J/t) &7的速度工作中",
+                    "", "&7储存电能: &6" + Utils.powerFormatAndFadeDecimals((double) stored + rate) + " J"
                 )
-                    : new CustomItemStack(Material.ORANGE_STAINED_GLASS_PANE, "&c不在发电",
-                    "", "&7发电量已达上限.",
-                    "", "&7储存的电力: &6" + Utils.powerFormatAndFadeDecimals(stored) + " J")
+                    : new CustomItemStack(Material.ORANGE_STAINED_GLASS_PANE, "&c未发电",
+                    "", "&7发电机已达到电容量上限, 无法继续发电.",
+                    "", "&7储存电能: &6" + Utils.powerFormatAndFadeDecimals(stored) + " J")
             );
         }
 
@@ -146,6 +146,7 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
     }
 
     @Getter
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public enum Type {
 
         ADVANCED(Items.ADVANCED_SOLAR_PANEL, ADVANCED_DAY_RATE, ADVANCED_NIGHT_RATE, ADVANCED_OUTPUT,
@@ -178,39 +179,5 @@ public class AdvancedSolarPanel extends SlimefunItem implements InventoryBlock, 
 
         @Nonnull
         private final ItemStack[] recipe;
-
-		Type(SlimefunItemStack item, int dayGenerationRate, int nightGenerationRate, int output,
-				int storage, ItemStack[] itemStacks) {
-			this.recipe = itemStacks;
-			this.dayGenerationRate = dayGenerationRate;
-			this.nightGenerationRate = nightGenerationRate;
-			this.item = item;
-			this.output = output;
-			this.storage = storage;
-		}
-
-		ItemStack[] getRecipe() {
-			return this.recipe;
-		}
-
-		int getStorage() {
-			return this.storage;
-		}
-
-		int getNightGenerationRate() {
-			return this.nightGenerationRate;
-		}
-
-		int getDayGenerationRate() {
-			return this.dayGenerationRate;
-		}
-
-		SlimefunItemStack getItem() {
-			return this.item;
-		}
-
-		public int getOutput() {
-			return output;
-		}
     }
 }

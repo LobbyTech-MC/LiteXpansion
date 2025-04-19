@@ -19,6 +19,6 @@ public class MultiFunctionalElectricStorageUnit extends ChargingStorageUnit {
 
     @Override
     public String getTitle() {
-        return "&8多功能电力存储单元";
+        return "&8多功能电子储存单元(MFE)";
     }
 }

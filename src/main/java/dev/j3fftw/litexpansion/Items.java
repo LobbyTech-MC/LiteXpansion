@@ -5,7 +5,6 @@ import dev.j3fftw.litexpansion.machine.MassFabricator;
 import dev.j3fftw.litexpansion.machine.Recycler;
 import dev.j3fftw.litexpansion.machine.RubberSynthesizer;
 import dev.j3fftw.litexpansion.machine.generators.AdvancedSolarPanel;
-import dev.j3fftw.litexpansion.utils.Constants;
 import dev.j3fftw.litexpansion.weapons.NanoBlade;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
@@ -28,7 +27,7 @@ public final class Items {
         ),
         new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode(
             "3f87fc5cbb233743a82fb0fa51fe739487f29bcc01c9026621ecefad197f4fb1")),
-            "&7纳米科技"
+            "&7工业(LiteXpansion)"
         )
     );
 
@@ -83,9 +82,9 @@ public final class Items {
     public static final SlimefunItemStack DIAMOND_DRILL = new SlimefunItemStack(
         "DIAMOND_DRILL",
         Material.DIAMOND_SHOVEL,
-        "&b钻石钻头",
+        "&b钻石采矿钻头",
         "",
-        "&7快速破坏任何岩石和黑曜石",
+        "&7快速破坏任何岩石与黑曜石",
         "&7右键缓慢破坏",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 1000 J"
@@ -101,7 +100,7 @@ public final class Items {
         "&7节点配置复制器",
         "",
         "&7> &e右键 &7- 复制节点配置",
-        "&7> &e左键  &7- 粘贴节点配置",
+        "&7> &e左键  &7- 黏贴节点配置",
         "&7> &eShift+右键 &7- 清除节点配置"
     );
     //endregion
@@ -169,14 +168,14 @@ public final class Items {
         Material.DEAD_BUSH,
         "&8废料",
         "",
-        "&7用于合成 &5纳米物质"
+        "&7用于合成 &5UU 物质"
     );
     public static final SlimefunItemStack UU_MATTER = new SlimefunItemStack(
         "UU_MATTER",
         Material.PURPLE_DYE,
-        "&5纳米物质",
+        "&5UU 物质",
         "",
-        "&7用于生产各种物品"
+        "&7用于合成各种物品"
     );
     public static final SlimefunItemStack IRIDIUM = new SlimefunItemStack(
         "IRIDIUM",
@@ -188,7 +187,7 @@ public final class Items {
         Material.PAPER,
         "&f铱板",
         "",
-        "&7用于生产量子套"
+        "&7用于合成量子套"
     );
     public static final SlimefunItemStack THORIUM_DUST = new SlimefunItemStack(
         "THORIUM_DUST",
@@ -223,12 +222,12 @@ public final class Items {
     public static final SlimefunItemStack ELECTRONIC_CIRCUIT = new SlimefunItemStack(
         "ELECTRONIC_CIRCUIT",
         Material.COBWEB,
-        "&7电路板"
+        "&7基础电路"
     );
     public static final SlimefunItemStack ADVANCED_CIRCUIT = new SlimefunItemStack(
         "ADVANCED_CIRCUIT",
         Material.COBWEB,
-        "&7高级电路板"
+        "&7高级电路"
     );
     //endregion
 
@@ -277,12 +276,12 @@ public final class Items {
     public static final SlimefunItemStack REINFORCED_STONE = new SlimefunItemStack(
         "REINFORCED_STONE",
         Material.STONE,
-        "&7强化原石"
+        "&7强化圆石"
     );
     public static final SlimefunItemStack REINFORCED_DOOR = new SlimefunItemStack(
         "REINFORCED_DOOR",
         Material.IRON_DOOR,
-        "&7强化铁门"
+        "&7强化门"
     );
     public static final SlimefunItemStack REINFORCED_GLASS = new SlimefunItemStack(
         "REINFORCED_GLASS",
@@ -300,7 +299,7 @@ public final class Items {
         Material.BLACK_CONCRETE,
         "&8回收机",
         "",
-        "&f从任何物品中回收出 &8废料",
+        "&f回收任何物品来获得 &8废料",
         "",
         LoreBuilderDynamic.powerBuffer(Recycler.CAPACITY),
         LoreBuilderDynamic.powerPerTick(Recycler.ENERGY_CONSUMPTION)
@@ -308,9 +307,9 @@ public final class Items {
     public static final SlimefunItemStack MASS_FABRICATOR_MACHINE = new SlimefunItemStack(
         "MASS_FABRICATOR_MACHINE",
         Material.PURPLE_CONCRETE,
-        "&5纳米物质工厂",
+        "&5物质生成机",
         "",
-        "&f将 &8废料 &f转换成 &5纳米物质",
+        "&f将 &8废料 &f转换成 &5UU 物质",
         "&7&o&m\"只需要亿点点电\"",
         "",
         LoreBuilderDynamic.powerBuffer(MassFabricator.CAPACITY),
@@ -319,7 +318,7 @@ public final class Items {
     public static final SlimefunItemStack RUBBER_SYNTHESIZER_MACHINE = new SlimefunItemStack(
         "RUBBER_SYNTHESIZER",
         Material.ORANGE_CONCRETE,
-        "&6橡胶厂",
+        "&6橡胶合成机",
         "",
         "&f将原油转化为 &7橡胶",
         "",
@@ -339,7 +338,7 @@ public final class Items {
         "ADVANCED_SOLAR_PANEL",
         Material.BLACK_GLAZED_TERRACOTTA,
         "&7&l高级太阳能板",
-        "&9可以在夜间工作",
+        "&9可在夜间工作",
         "",
         LoreBuilderDynamic.powerBuffer(AdvancedSolarPanel.ADVANCED_STORAGE),
         LoreBuilderDynamic.powerPerTick(AdvancedSolarPanel.ADVANCED_DAY_RATE) + " (日间)",
@@ -368,12 +367,12 @@ public final class Items {
     public static final SlimefunItemStack MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT = new SlimefunItemStack(
         "MULTI_FUNCTIONAL_ELECTRIC_STORAGE_UNIT",
         Material.IRON_BLOCK,
-        "&7多功能电力存储单元"
+        "&7多功能电子储存单元(MFE)"
     );
     public static final SlimefunItemStack MULTI_FUNCTIONAL_STORAGE_UNIT = new SlimefunItemStack(
         "MULTI_FUNCTIONAL_STORAGE_UNIT",
         Material.DIAMOND_BLOCK,
-        "&7多功能存储单元"
+        "&7多功能储存单元(MFSU)"
     );
     public static final SlimefunItemStack GOLD_PLATE = new SlimefunItemStack(
         "GOLD_PLATE",
@@ -399,13 +398,13 @@ public final class Items {
     public static final SlimefunItemStack REFINED_SMELTERY = new SlimefunItemStack(
         "REFINED_SMELTERY",
         Material.BLAST_FURNACE,
-        "&7高炉"
+        "&7精炼炉"
     );
 
     public static final SlimefunItemStack METAL_FORGE = new SlimefunItemStack(
         "METAL_FORGE",
         Material.DISPENSER,
-        "&7金属锻造炉"
+        "&7金属冶炼炉"
     );
 
     public static final SlimefunItemStack MANUAL_MILL = new SlimefunItemStack(
@@ -466,11 +465,11 @@ public final class Items {
         "FOOD_SYNTHESIZER",
         new CustomItemStack(PlayerHead.getItemStack(PlayerSkin.fromHashCode(
             "a967efe969d264f635f2c201c34381ef59c72e16ec50af7692033121e22fba9c")),
-            "食品加工厂"),
-        "&d食品加工厂",
+            "食物合成器"),
+        "&d食物合成器",
         "",
-        "&f生产生活必需品",
-        "&f解决温饱问题必备!",
+        "&f用合成的食物填饱你的肚子.",
+        "&f还有多种口味!",
         "",
         "&c&o&8\u21E8 &e\u26A1 &70 / 100 J"
     );
@@ -498,7 +497,7 @@ public final class Items {
     public static final SlimefunItemStack POWER_UNIT = new SlimefunItemStack(
         "POWER_UNIT",
         Material.GOLDEN_HOE,
-        "&7驱动把手"
+        "&7能量单元"
     );
 
     public static final SlimefunItemStack IRON_ITEM_CASING = new SlimefunItemStack(
@@ -546,7 +545,7 @@ public final class Items {
     public static final SlimefunItemStack UU_CRAFTER = new SlimefunItemStack(
         "UU_CRAFTER",
         Material.CRAFTING_TABLE,
-        "&7纳米物质合成机"
+        "&7UU合成机"
     );
 
     public static final SlimefunItemStack CONVERTER = new SlimefunItemStack(
@@ -555,23 +554,15 @@ public final class Items {
         "&7转换机"
     );
 
-    private static final Enchantment glowEnchant = Enchantment.getByKey(Constants.GLOW_ENCHANT);
 
     static {
-        ADVANCED_SOLAR_HELMET.addEnchantment(Enchantment.UNBREAKING, 1);
-        CARBONADO_SOLAR_HELMET.addEnchantment(Enchantment.UNBREAKING, 2);
-        ENERGIZED_SOLAR_HELMET.addEnchantment(Enchantment.UNBREAKING, 3);
-        ADVANCEDLX_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.UNBREAKING, 4);
-        HYBRID_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.UNBREAKING, 5);
-        ULTIMATE_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.UNBREAKING, 6);
-        ADVANCED_CIRCUIT.addEnchantment(glowEnchant, 1);
-        GLASS_CUTTER.addEnchantment(glowEnchant, 1);
+        ADVANCED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 1);
+        CARBONADO_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 2);
+        ENERGIZED_SOLAR_HELMET.addEnchantment(Enchantment.DURABILITY, 3);
+        ADVANCEDLX_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
+        HYBRID_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
+        ULTIMATE_SOLAR_HELMET.addUnsafeEnchantment(Enchantment.DURABILITY, 6);
 
-        DIAMOND_DRILL.addEnchantment(glowEnchant, 1);
-        LAPOTRON_CRYSTAL.addEnchantment(glowEnchant, 1);
-        ADVANCEDLX_SOLAR_HELMET.addEnchantment(glowEnchant, 1);
-        HYBRID_SOLAR_HELMET.addEnchantment(glowEnchant, 1);
-        ULTIMATE_SOLAR_HELMET.addEnchantment(glowEnchant, 1);
     }
 
     private Items() {}
